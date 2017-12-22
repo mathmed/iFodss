@@ -10,13 +10,13 @@ export default class Header extends Component {
 		return(
 			<View style = {styles.viewHeader}>
 				<TouchableHighlight underlayColor = 'transparent' onPress = {() => alert('menu')} >
-					<Icon name = 'menu' size = {40} color = 'snow' />
+					<Icon name = 'menu' size = {25} color = 'snow' />
 				</TouchableHighlight>
 
 				<Text style = {styles.textoHeader}> iFods </Text>
 
 				<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.perfil()} >
-					<Icon name = 'perm-identity' size = {40} color = 'snow' /> 
+					<Icon name = 'perm-identity' size = {25} color = 'snow' /> 
 				</TouchableHighlight>
 
 			</View>

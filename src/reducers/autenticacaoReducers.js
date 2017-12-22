@@ -12,7 +12,6 @@ const INITIAL_STATE ={
 	erroRedefinir: '',
 	checkMasculino: true,
 	checkFeminino: false
-
 }
 
 export default (state = INITIAL_STATE, action) =>{

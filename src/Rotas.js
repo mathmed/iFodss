@@ -17,7 +17,7 @@ export default class Rotas extends Component{
 					<Scene key = 'inicial' component = {Inicial} hideNavBar  />
                     <Scene key = 'conversa' component = {Conversa} title = '' hideNavBar = {false} navigationBarStyle = {{backgroundColor: '#f6546a'}} titleStyle= {{color: 'white', fontWeight: 'bold', fontSize: 20, alignItems: 'center'}}/>
                     <Scene key = 'telafoto' component = {TelaFoto} title = '' hideNavBar = {false} navigationBarStyle = {{backgroundColor: '#f6546a'}} titleStyle= {{color: 'white', fontWeight: 'bold', fontSize: 20, alignItems: 'center'}}/>
-					<Scene key = 'cadastro' component = {Cadastro} title="Cadastro" titleStyle = {{color: 'black', backgroundColor: 'transparent'}} hideNavBar = {false} navigationBarStyle={{backgroundColor: 'transparent'}}/> 
+					<Scene key = 'cadastro' component = {Cadastro} title="Cadastro" titleStyle = {{color: 'snow', backgroundColor: '#f6546a'}} hideNavBar = {false} navigationBarStyle={{backgroundColor: '#f6546a'}}/> 
 				</Scene>
 			</Router>
 

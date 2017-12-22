@@ -1,6 +1,7 @@
 import firebase from 'firebase'
 import b64 from 'base-64'
-
+var moment = require('moment');
+import {Alert} from 'react-native'
 
 export const modificaStatusNovoPost = (texto) => {
 	return{
@@ -17,6 +18,10 @@ export const publicarStatus = (imagem, status) => {
 		const email = firebase.auth().currentUser.email
 		const emailB64 = b64.encode(email)
 		const data = -1 * new Date().getTime()
+		const d1 = moment().local().format('DD/MM/YYYY');
+		const d2 = ' às ';
+		const d3 = moment().local().format('h:mm a');
+		const dataPublicacao = d1+d2+d3;
 				firebase.database().ref('usuarios/'+emailB64).once('value', snapshot => {
 					const info = snapshot.val();
 					const fotoPerfil = info.foto
@@ -24,7 +29,7 @@ export const publicarStatus = (imagem, status) => {
 					const idade = info.idade
 					const cidade = info.cidade
 					const sexo = info.sexo
-					firebase.database().ref("feed/").push({imagem, status, emailB64, data, fotoPerfil, nome, idade, cidade, sexo })
+					firebase.database().ref("feed/").push({imagem, status, emailB64, data, fotoPerfil, nome, idade, cidade, sexo, dataPublicacao })
 						.then(value => publicaSucesso(dispatch))
 						.catch(erro => publicaErro(erro, dispatch))
 				})
@@ -35,14 +40,14 @@ export const publicarStatus = (imagem, status) => {
 }
 
 const publicaSucesso = (dispatch) => {
-	alert("Publicado com sucesso!");
+	Alert.alert("Êxito", "Status publicado");
 	dispatch({
 		type: "PUBLICADO_COM_SUCESSO"})
 
 }
 
 const publicaErro = (erro, dispatch) => {
-	alert(erro);
+	Alert.alert('Erro', erro);
 	dispatch({
 		type: "PUBLICADO_COM_SUCESSO"})
 

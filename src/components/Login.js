@@ -8,11 +8,14 @@ import {connect} from 'react-redux'
 import {modificaDadosCadastroElogin, autenticar} from '../actions/autenticacaoActions.js';
 
 class Login extends Component{
+
+
 	_renderizarBotao(){
         if(this.props.loadingLogin){
         	return (<ActivityIndicator size = 'large' />)
    
 	}
+
 
 		return(
 			<View style = {{marginTop:20, alignItems: 'center', justifyContent: 'center', flex: 1}}>
@@ -31,7 +34,14 @@ class Login extends Component{
 		const email = this.props.email
 		const senha = this.props.senha
 		this.props.autenticar({email,senha})
+
+
 	}
+
+
+	
+
+
 	render(){
 		return(
 			<ImageBackground style = {{flex:1, width: null}} source = {require('../imgs/fundo.jpg')}>
@@ -46,7 +56,7 @@ class Login extends Component{
 							<Kaede
 							    label={'E-Mail'}
 								style={{ backgroundColor: '#f9f5ed' }}
-							    labelStyle={{ color: 'black', backgroundColor: 'snow' }}
+							    labelStyle={{ color: 'grey', backgroundColor: 'snow' }}
 							    inputStyle={{ color: 'black', backgroundColor: 'snow' }}
 								value = {this.props.email}
 							    onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 1)}
@@ -59,7 +69,7 @@ class Login extends Component{
 							<Kaede
 							    style={{ backgroundColor: '#f9f5ed' }}
 							    label={'Senha'}
-							    labelStyle={{ color: 'black', backgroundColor: 'snow' }}
+							    labelStyle={{ color: 'grey', backgroundColor: 'snow' }}
 							    inputStyle={{ color: 'black', backgroundColor: 'snow' }}
 							    secureTextEntry = {true}
 							    value = {this.props.senha}
@@ -73,42 +83,37 @@ class Login extends Component{
 						{this._renderizarBotao()}
 
 
-						<View style = {{justifyContent: 'space-between', flexDirection: 'row', marginTop: 20}}>
+						<View style = {{justifyContent: 'center', flexDirection: 'row', marginTop: 20}}>
 							<TouchableHighlight onPress = {() => alert('a')} underlayColor= 'transparent'>
 								<View style = {styles.botaoAux}>
 								        <Image style = {{height: 25, width: 25}} source = {require('../imgs/f.jpg')}/>
-
-										<Text style = {[styles.textoLogo,{fontSize:20, color: 'black'}]}> Facebook </Text>
 								</View>
 							</TouchableHighlight>
 
 							<TouchableHighlight onPress = {() => alert("oi")} underlayColor= 'transparent'>
 								<View style = {styles.botaoAux}>
 								        <Image style = {{height: 25, width: 25}} source = {require('../imgs/g.jpg')}/>
-
-										<Text style = {[styles.textoLogo,{fontSize:20, color: 'black'}]}> Google </Text>
 								</View>
 							</TouchableHighlight>		
 
 						</View>
 
-						<View style = {{marginTop: 50, alignItems: 'center', justifyContent: 'center', flex: 1}}>
+						<View style = {{marginTop: 20, alignItems: 'center', justifyContent: 'center', flex: 1, marginBottom: 10}}>
 							<TouchableHighlight onPress = {() => Actions.cadastro()} underlayColor= 'transparent'>
-								<Text style = {[styles.textoLogo,{fontSize:18, color: 'snow'}]}> Ainda não tem conta? Cadastre-se </Text>
+								<Text style = {[styles.textoLogo,{fontSize:18, color: 'snow'}]}> Cadastre-se! </Text>
 							</TouchableHighlight>
 						</View>
-
-
-
 			
 					</View>
 
 				</View>
 			</ImageBackground>
 
-		)
+		);
 	}
 }
+
+
 
 
 const mapStateToProps = state =>(
@@ -116,7 +121,7 @@ const mapStateToProps = state =>(
         email: state.autenticacaoReducers.email,
         senha: state.autenticacaoReducers.senha,
         erroLogin: state.autenticacaoReducers.erroLogin,
-        loadingLogin: state.autenticacaoReducers.loadingLogin,
+        loadingLogin: state.autenticacaoReducers.loadingLogin
 
     }
 );

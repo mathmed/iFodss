@@ -1,7 +1,8 @@
 import firebase from 'firebase'
 import b64 from 'base-64'
 import _ from 'lodash'
-
+var moment = require('moment');
+import {Alert} from 'react-native'
 
 export const conversaUsuarioFetch = contatoEmail => {
 	const {currentUser} = firebase.auth();
@@ -30,22 +31,23 @@ export const enviaMensagem = (mensagem, contatoNome, contatoEmail, fotoPerfil) =
 		const usuarioEmail = currentUser.email
 		const usuarioEmailB64 = b64.encode(usuarioEmail)
 		const x = new Date()
-		const hora = x.getHours()
-		const minuto = x.getMinutes()
-		const date = hora.toString()+':'+minuto.toString()
+		const d1 = moment().local().format('DD/MM/YYYY');
+		const d2 = ' às ';
+		const d3 = moment().local().format('h:mm a');
+		const dataMSG = d1+d2+d3;
 		return dispatch => {
 
 		firebase.database().ref('/mensagens/'+usuarioEmailB64+'/'+contatoEmail)
-			.push({mensagem, tipo : 'e', date: date})
+			.push({mensagem, tipo : 'e', date: dataMSG})
 			.then(() => {
 				firebase.database().ref('/mensagens/'+contatoEmail+'/'+usuarioEmailB64)
-					.push({mensagem, tipo : 'r', date: date})
+					.push({mensagem, tipo : 'r', date: dataMSG})
 					.then(() => dispatch({type: "LIMPAR_MENSAGEM"}))
 
 			})
 			.then(() => {
 				firebase.database().ref('/usuario_conversas/' +usuarioEmailB64 +'/' + contatoEmail)
-					.set({nome: contatoNome, email: b64.decode(contatoEmail), data: date, foto: fotoPerfil})
+					.set({nome: contatoNome, email: b64.decode(contatoEmail), data: dataMSG, foto: fotoPerfil})
 
 
 			})
@@ -55,7 +57,7 @@ export const enviaMensagem = (mensagem, contatoNome, contatoEmail, fotoPerfil) =
 					.then(snapshot => {
 						const dadosUsuario =snapshot.val()
 						firebase.database().ref('/usuario_conversas/' +contatoEmail +'/' + usuarioEmailB64)
-							.set({nome: dadosUsuario.nome , email: usuarioEmail, data: date, foto:dadosUsuario.foto })
+							.set({nome: dadosUsuario.nome , email: usuarioEmail, data: dataMSG, foto:dadosUsuario.foto })
 					})
 			})
 
@@ -78,8 +80,8 @@ export const excluirConversas = email => {
 	const emailUsuario = currentUser.email
 	let emailUsuarioB64 = b64.encode(currentUser.email);
 	var adaRef = firebase.database().ref('/usuario_conversas/'+emailUsuarioB64+'/'+emailUsuarioExcluirB64);
-	adaRef.remove().then(() => alert('Conversa exluida'))
-		.catch(erro => (alert(erro)))
+	adaRef.remove()
+		.catch(erro => (Alert.alert('Erro', erro)))
 
 
 

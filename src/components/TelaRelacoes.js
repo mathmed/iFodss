@@ -7,8 +7,16 @@ import b64 from 'base-64'
 import UserAvatar from 'react-native-user-avatar'
 import {listaRelacoesFetch, novoMete} from '../actions/relacoesActions.js'
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import DropdownAlert from 'react-native-dropdownalert';
 
 class TelaRelacoes extends Component{
+	constructor(props) {
+    	super(props)
+    	const itens = 
+    	 {key: 1, backgroundColor: '#f6546a', type: 'custom', title: 'Opa!', message: 'Você deu um mete em '}
+    	
+    	this.state ={ itens: itens}
+    }
 	componentWillMount() {
 		this.props.listaRelacoesFetch();
 		this.criaFonteDeDados(this.props.ultimas);
@@ -24,20 +32,24 @@ class TelaRelacoes extends Component{
 		this.fonteDeDados1= ds.cloneWithRows(ultimas);
 
 	}
+	novoMete1(nome, emailB64, fotoPerfil, idade, cidade, sexo){
+		novoMete(nome, emailB64, fotoPerfil, idade, cidade, sexo)
+		this.showAlert(nome)
+	}
 
-	renderRow(ultimas, hora){
+	renderRow = (ultimas, hora) => {
 		if(ultimas.tipo == "recebeu"){
 			return(
 					<View style={{ flex: 1, padding: 50, borderBottomWidth: 1, borderColor: "#CCC" , justifyContent: 'space-between', margin: 5}}>
 						<View style = {{margin:10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
 							<TouchableOpacity  underlayColor = 'transparent' onPress = {() => Actions.telafoto({imagem: ultimas.foto, nome: ultimas.nome, idade:ultimas.idade, cidade: ultimas.cidade, sexo: ultimas.sexo, title: 'Perfil de '+ultimas.nome})}>
-								<UserAvatar size="30" name="MM" src = {ultimas.foto} />
+								<UserAvatar size="45" name="MM" src = {ultimas.foto} />
 							</TouchableOpacity >
 							<Text style={{ fontSize: 18,marginLeft: 10}}> Você recebeu um mete de {ultimas.nome}, {ultimas.idade} </Text>
 						</View>
 						<View style = {{flexDirection: 'row'}}>
 								<View style = {{marginLeft: 20, marginRight: 20}}>
-									<TouchableHighlight underlayColor = 'transparent' onPress = {() => novoMete(ultimas.nome, b64.encode(ultimas.email), ultimas.foto, ultimas.idade, ultimas.cidade, ultimas.sexo)} >
+									<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.novoMete1(ultimas.nome, b64.encode(ultimas.email), ultimas.foto, ultimas.idade, ultimas.cidade, ultimas.sexo)} >
 										<Icon name = 'favorite' size = {40} color = '#f6546a' />
 									</TouchableHighlight>
 								</View>
@@ -56,7 +68,7 @@ class TelaRelacoes extends Component{
 						<View style = {{margin: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
 							
 							<TouchableOpacity  underlayColor = 'transparent' onPress = {() => Actions.telafoto({imagem: ultimas.foto, nome: ultimas.nome, idade:ultimas.idade, cidade: ultimas.cidade, sexo: ultimas.sexo, title: 'Perfil de '+ultimas.nome})}>
-								<UserAvatar size="30" name="MM" src = {ultimas.foto} />
+								<UserAvatar size="45" name="MM" src = {ultimas.foto} />
 							</TouchableOpacity >
 							<Text style={{ fontSize: 18, marginLeft: 10}}> Você enviou um mete para {ultimas.nome}, {ultimas.idade} </Text>
 						</View>
@@ -80,10 +92,36 @@ class TelaRelacoes extends Component{
 					dataSource = {this.fonteDeDados1}
 					renderRow = {this.renderRow }
 				/>
+				<DropdownAlert
+			          ref={(ref) => this.dropdown = ref}
+			          containerStyle={{
+			            backgroundColor: '#f6546a',
+			          }}
+			          updateStatusBar = {false}
+			          showCancel={true}
+			          onClose={(data) => this.onClose(data)}
+			          onCancel={(data) => this.onClose(data)}
+	        	/>
 			</View>
 
 		)
 	}
+    showAlert(nome) {
+    	if (this.state.itens.type == 'close') {
+      		this.closeAlert()
+	    } else {
+		      const title = this.state.itens.title 
+		      this.dropdown.alertWithType(this.state.itens.type, title, this.state.itens.message+nome)
+	    }
+  	}
+
+  closeAlert = () => {
+    this.dropdown.close()
+  }
+  
+  onClose(data) {
+    console.log(data);
+  }
 }
 
 

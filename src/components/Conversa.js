@@ -29,18 +29,21 @@ class Conversa extends Component {
 		if(texto.tipo === 'e'){
 			return(
 				<View style = {{ alignItems: 'flex-end', marginTop: 5, marginBottom: 5, marginLeft: 40}}>
-					<Text style ={{fontSize: 18, color: 'black', padding: 10, backgroundColor: '#dbf5b4', elevation:1}}> {texto.mensagem} </Text>
-					<Text style ={{fontSize: 12, color: 'black', padding: 10, backgroundColor: '#dbf5b4', elevation:1}}> {texto.date} </Text>
-
+					<View style = {{backgroundColor: '#dbf5b4', borderRadius: 20}}>
+						<Text style ={{fontSize: 18, color: 'black', padding: 10, elevation:1}}> {texto.mensagem} </Text>
+						<Text style ={{fontSize: 12, color: 'black', padding: 10, elevation:1}}> {texto.date} </Text>
+					</View>
 				</View>
 
 
 			)
 		}else{
 			return(
-				<View style = {{alignItems: 'flex-start', marginTop: 5, marginBottom: 5, marginRight: 40}}>
-					<Text style ={{fontSize: 18, color: 'black', padding: 10, backgroundColor: 'white', elevation:1}}>{texto.mensagem}</Text>
-					<Text style ={{fontSize: 12, color: 'black', padding: 10, backgroundColor: 'white', elevation:1}}> {texto.date} </Text>
+				<View style = {{alignItems: 'flex-start', marginTop: 5, marginBottom: 5, marginRight: 40 }}>
+					<View style = {{backgroundColor: '#98c1c0', borderRadius: 20}}>
+						<Text style ={{fontSize: 18, color: 'black', padding: 10, elevation:1}}>{texto.mensagem}</Text>
+						<Text style ={{fontSize: 12, color: 'black', padding: 10, backgroundColor: '#98c1c0', elevation:1}}> {texto.date} </Text>
+					</View>
 				</View>
 			)
 		}
@@ -49,7 +52,7 @@ class Conversa extends Component {
 
 	render(){
 		return(
-			<View style ={{flex: 1, marginTop: 50, backgroundColor: '#e6e6ff', padding: 10}}>
+			<View style ={{flex: 1, backgroundColor: 'snow', padding: 10}}>
 				<View style = {{flex: 1, paddingBottom: 20}}>
 					<ListView
 						enableEmptySections

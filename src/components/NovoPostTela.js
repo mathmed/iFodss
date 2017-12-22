@@ -8,6 +8,7 @@ import {connect} from 'react-redux'
 import {modificaStatusNovoPost, publicarStatus} from '../actions/publicacaoActions.js';
 import RNFetchBlob from 'react-native-fetch-blob'
 import firebase from 'firebase'
+import DropdownAlert from 'react-native-dropdownalert';
 
 const Blob = RNFetchBlob.polyfill.Blob
 const fs = RNFetchBlob.fs
@@ -44,11 +45,15 @@ const uploadImage = (uri, imageName, mime = 'image/jpg') => {
 class NovoPostTela extends Component{
 	constructor(props){
 		super(props)
+		const erro = 
+    	 {key: 1, backgroundColor: '#f6546a', type: 'error', title: 'Erro', message: 'Carregue uma foto para publicar seu post. '}
+
 		this.state = {
 			imagePath: '',
 			imageHeight: '',
 			imageWidth: '',
-			status: ''
+			status: '',
+			erro: erro
 		}
 	}
 
@@ -57,7 +62,7 @@ class NovoPostTela extends Component{
 			this.props.foto = uploadImage(this.state.imagePath, `${this.state.imagePath}.jpg`).then((responseData) =>
 					this.props.publicarStatus(responseData, this.props.status))
 			}else{
-				alert("Carregue uma foto!")
+				this.showAlert(1)
 			}
 	}
 	_renderBotao(){
@@ -106,11 +111,43 @@ class NovoPostTela extends Component{
 							{this._renderBotao()}
 
 						</View>
+
 				</View>
+									<DropdownAlert
+			          ref={(ref) => this.dropdown = ref}
+			          containerStyle={{
+			            backgroundColor: '#f6546a',
+			          }}
+			          updateStatusBar = {false}
+			          showCancel={true}
+			          onClose={(data) => this.onClose(data)}
+			          onCancel={(data) => this.onClose(data)}
+        			/>
 			</View>
 
 		)
 	}
+	showAlert(tipo) {
+    	if (this.state.erro.type == 'close') {
+      		this.closeAlert()
+	    } else {
+	    	if(tipo == 1){
+		      const title = this.state.erro.title 
+		      this.dropdown.alertWithType(this.state.erro.type, title, this.state.erro.message)
+		    }else{
+		    	const title = this.state.erro.title 
+		      	this.dropdown.alertWithType(this.state.erro.type, title, this.state.erro.message)
+		    }
+	    }
+  	}
+
+	closeAlert = () => {
+	    this.dropdown.close()
+	  }
+	  
+	  onClose(data) {
+	    console.log(data);
+	  }
 
 	show(){
 		var options = {

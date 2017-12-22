@@ -7,7 +7,6 @@ export const novoMete = (nome, email, foto, idade, cidade, sexo) => {
 	const {currentUser} = firebase.auth();
 	const usuarioEmail = currentUser.email;
 	const usuarioEmailB64 = b64.encode(usuarioEmail);
-	alert("Você deu um mete em " + nome);
 	firebase.database().ref('usuarios/'+usuarioEmailB64).once('value', snapshot => {
 			const info = snapshot.val()
 			const foto1 = info.foto

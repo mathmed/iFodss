@@ -3,16 +3,15 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 	viewHeader:{
 		backgroundColor: '#f6546a',
-		height:70,
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		flexDirection: 'row',
 		padding:5,
-		flex:0.8
+		flex:0.6
 	},
 
 	textoHeader: {
-		fontSize: 26,
+		fontSize: 20,
 		fontWeight: 'bold',
 		fontFamily: 'sans-serif-medium',
 		color: 'snow'
@@ -20,12 +19,11 @@ const styles = StyleSheet.create({
 
 	viewTabInferior:{
 		backgroundColor: '#f6546a',
-		height:50,
 		alignItems: 'center',
-		justifyContent: 'space-between',
+		justifyContent: 'space-around',
 		flexDirection: 'row',
 		padding:5,
-		flex: 0.8
+		flex: 0.6
 
 	}
 

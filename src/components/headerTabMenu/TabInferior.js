@@ -9,20 +9,20 @@ export default class TabInferior extends Component {
 		return(
 			<View style = {styles.viewTabInferior}>
 				<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.inicial({valor: 1})} >
-					<Icon name = 'favorite' size = {40} color = 'snow' />
+					<Icon name = 'favorite' size = {25} color = 'snow' />
 				</TouchableHighlight>
 
 
 				<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.inicial({valor: 2})} >
-					<Icon name = 'home' size = {40} color = 'snow' />
+					<Icon name = 'home' size = {25} color = 'snow' />
 				</TouchableHighlight>
 
 				<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.inicial({valor: 3})} >
-					<Icon name = 'add-circle' size = {40} color = 'snow' />
+					<Icon name = 'add-circle' size = {25} color = 'snow' />
 				</TouchableHighlight>
 
 				<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.inicial({valor: 4})} >
-					<Icon name = 'chat' size = {40} color = 'snow' /> 
+					<Icon name = 'chat' size = {25} color = 'snow' /> 
 				</TouchableHighlight>
 			</View>
 		)

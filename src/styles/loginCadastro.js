@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
 		backgroundColor: '#a52a2a',
 		alignItems: 'center',
 		justifyContent: 'center',
-		height: 50,
-		width: 250,
+		height: 35,
+		width: 170,
 		borderRadius:15,
 		flexDirection: 'row' 
 	},
@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		height: 40,
-		width: 150,
+		width: 60,
+		margin: 20,
 		borderRadius: 10,
 		flexDirection: 'row'
 	}

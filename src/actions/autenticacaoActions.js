@@ -1,6 +1,7 @@
 import firebase from 'firebase'
 import {Actions} from 'react-native-router-flux'
 import b64 from 'base-64'
+import {Alert} from 'react-native'
 //import FBSDK, {LoginManager, AcessToken} from 'react-native-fbsdk'
 
 
@@ -49,7 +50,8 @@ export const cadastraUsuario = ({nome, email, senha, sexo}) => {
 					})
 					.catch(erro=>cadastroUsuarioErro(erro,dispatch))
 			}else{
-				alert("Informe um nome válido.")
+				Alert.alert('Erro', 'Não foi possível realizar o cadastro')
+
 				cadastroUsuarioErro(1, dispatch)
 			}
 		}
@@ -61,7 +63,10 @@ export const cadastroUsuarioSucesso =(dispatch) => {
 }
 
 export const cadastroUsuarioErro =(erro,dispatch) => {
+	if(erro!= 1){
+		Alert.alert('Erro', 'Não foi possível realizar o cadastro')
 
+	}
 	dispatch( { type: "CADASTRO_USUARIO_ERRO", payload : erro.message});
 
 }
@@ -114,7 +119,7 @@ const aposAutenticar = (dispatch) => {
 
 
 const loginUsuarioErro = (erro,dispatch) => {
-	alert(erro)
+	Alert.alert('Erro', 'Não foi possível realizar o login')
 	dispatch( {type : "LOGIN_USUARIO_ERRO", payload : erro.message})
 }
 

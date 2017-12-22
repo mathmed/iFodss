@@ -10,6 +10,7 @@ import firebase from 'firebase'
 import b64 from 'base-64'
 import RNFetchBlob from 'react-native-fetch-blob'
 import {modificaDadosPerfil, salvarDados, salvarFoto} from '../actions/perfilActions.js'
+import DropdownAlert from 'react-native-dropdownalert';
 
 const Blob = RNFetchBlob.polyfill.Blob
 const fs = RNFetchBlob.fs
@@ -46,10 +47,13 @@ const uploadImage = (uri, imageName, mime = 'image/jpg') => {
 class Perfil extends Component{
 	constructor(props){
 		super(props)
+		const itens = 
+    	 {key: 1, backgroundColor: '#f6546a', type: 'success', title: 'Sucesso', message: 'Dados atualizados.'}
 		this.state = {
 			imagePath: '',
 			imageHeight: '',
-			imageWidth: ''
+			imageWidth: '',
+			itens: itens
 		}
 	}
 
@@ -61,8 +65,8 @@ class Perfil extends Component{
 				if(info.foto){
 					this.setState({imagePath: info.foto})
 				}
-	})
-}
+		})
+	}
 
 	_salvar(){
 		const nome = this.props.nome
@@ -70,6 +74,7 @@ class Perfil extends Component{
 		const bio = this.props.bio
 		const idade = this.props.idade
 		this.props.salvarDados(nome,cidade,bio, idade)
+		this.showAlert()
 
 
 	}
@@ -156,12 +161,39 @@ class Perfil extends Component{
 
 
 				</View>
+				<DropdownAlert
+			          ref={(ref) => this.dropdown = ref}
+			          containerStyle={{
+			            backgroundColor: '#f6546a',
+			          }}
+			          updateStatusBar = {false}
+			          showCancel={true}
+			          onClose={(data) => this.onClose(data)}
+			          onCancel={(data) => this.onClose(data)}
+        		/>
 
 			</View>
 
 		)
 
 	}
+    showAlert() {
+    	if (this.state.itens.type == 'close') {
+      		this.closeAlert()
+	    } else {
+		      const title = this.state.itens.title 
+		      this.dropdown.alertWithType(this.state.itens.type, title, this.state.itens.message)
+	    }
+  	}
+
+	closeAlert = () => {
+	    this.dropdown.close()
+	}
+	  
+	onClose(data) {
+	    console.log(data);
+	}
+
 	show(){
 		var options = {
 			  title: 'Seleciones sua foto',

@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import b64 from 'base-64'
+import {Alert} from 'react-native'
 
 export const modificaDadosPerfil = (texto, dado) =>{
 	switch(dado){
@@ -65,14 +66,13 @@ export const salvarFoto =( foto ) => {
 
 
 const alteradoSucesso = (dispatch) => {
-	alert("Dados atualizados!");
 	dispatch({
 		type: 'SUCESSO'
 	})
 }
 
 const alteradoErro = (erro, dispatch) => {
-	alert(erro);
+	Alert.alert('Erro', erro);
 	dispatch({
 		type: 'ERRO'
 	})

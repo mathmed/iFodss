@@ -45,12 +45,12 @@ class Cadastro extends Component{
 		return(
 			<ImageBackground style = {{flex:1, width: null}} source = {require('../imgs/fundo.jpg')}>
 				<View style = {styles.viewPrincipal}>
-					<View style = {	{marginTop:40 ,padding:10 ,flex: 10}}>
-						<View style = {{margin:10}}>
+					<View style = {	{marginTop:10 ,padding:5 ,flex: 10}}>
+						<View style = {{margin:7}}>
 							<Kaede
 							    label={'E-Mail'}
 								style={{ backgroundColor: '#f9f5ed' }}
-							    labelStyle={{ color: 'black', backgroundColor: 'snow' }}
+							    labelStyle={{ color: 'grey', backgroundColor: 'snow' }}
 							    inputStyle={{ color: 'black', backgroundColor: 'snow' }}
 							    value = {this.props.email}
 							    onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 1)}
@@ -60,11 +60,11 @@ class Cadastro extends Component{
 							/>
 						</View>
 
-						<View style = {{margin:10}}>
+						<View style = {{margin:7}}>
 							<Kaede
 							    style={{ backgroundColor: '#f9f5ed' }}
 							    label={'Senha'}
-							    labelStyle={{ color: 'black', backgroundColor: 'snow' }}
+							    labelStyle={{ color: 'grey', backgroundColor: 'snow' }}
 							    inputStyle={{ color: 'black', backgroundColor: 'snow' }}
 							    secureTextEntry = {true}
 							    value = {this.props.senha}
@@ -76,11 +76,11 @@ class Cadastro extends Component{
 
 
 
-						<View style = {{margin:10}}>
+						<View style = {{margin:7}}>
 							<Kaede
 							    label={'Nome'}
 								style={{ backgroundColor: '#f9f5ed' }}
-							    labelStyle={{ color: 'black', backgroundColor: 'snow' }}
+							    labelStyle={{ color: 'grey', backgroundColor: 'snow' }}
 							    inputStyle={{ color: 'black', backgroundColor: 'snow' }}
 							    value = {this.props.nome}
 							    onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 3)}
@@ -89,7 +89,7 @@ class Cadastro extends Component{
 							/>
 						</View>
 
-						<View style = {{margin:10}}>
+						<View style = {{margin:7}}>
 							<View style = {{ justifyContent: 'space-between', padding: 10, flexDirection: 'row'}}>
 								<CheckBox
 								  label='Masculino'
