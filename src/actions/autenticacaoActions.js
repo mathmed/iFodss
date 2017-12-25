@@ -1,129 +1,173 @@
-import firebase from 'firebase'
-import {Actions} from 'react-native-router-flux'
-import b64 from 'base-64'
-import {Alert} from 'react-native'
+import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
+import b64 from 'base-64';
+import { Alert } from 'react-native';
 //import FBSDK, {LoginManager, AcessToken} from 'react-native-fbsdk'
 
-
 export const alteraCheckBoxMasculino = (check) => {
-		let aux = {
+		const aux = {
 			feminino: check,
 			masculino: !check
 
-		}
-		return{
+		};
+		return {
 			type: 'MODIFICA_MASCULINO',
 			payload: aux
-		}
-
-}
+		};
+};
 
 export const alteraCheckBoxFeminino = (check) => {
-
-		let aux = {
+		const aux = {
 			masculino: check,
 			feminino: !check
-
-		}
-		return{
+		};
+		return {
 			type: 'MODIFICA_FEMININO',
 			payload: aux
 
-		}
+		};
+};
 
-}
-
-export const cadastraUsuario = ({nome, email, senha, sexo}) => {
-	const cidade = ''
-	const bio = 'Ola! Eu sou ' + nome
-	const foto = ''
-	const idade = ''
-	const emailCriar = email.toLowerCase()
+export const cadastraUsuario = ({ nome, email, senha, sexo }) => {
+	const cidade = '';
+	const bio = "Ola! Eu sou " + nome;
+	const foto = '';
+	const idade = '';
+	const emailCriar = email.toLowerCase();
 	return dispatch => {
-		dispatch({type: "CADASTRO_EM_ANDAMENTO"})
-			if(nome.length >= 4){
-				firebase.auth().createUserWithEmailAndPassword(emailCriar,senha)
-					.then(user =>{
-						let emailB64 = b64.encode(emailCriar);
-						firebase.database().ref('usuarios/'+emailB64).set({nome, sexo, cidade, bio, foto, emailCriar, idade})
-							.then(value => cadastroUsuarioSucesso(dispatch))
+		dispatch({ type: 'CADASTRO_EM_ANDAMENTO' });
+			if (nome.length >= 4) {
+				firebase.auth().createUserWithEmailAndPassword(emailCriar, senha)
+					.then(user => {
+						const emailB64 = b64.encode(emailCriar);
+						firebase.database().ref('usuarios/' + emailB64).set({ nome, sexo, cidade, bio, foto, emailCriar, idade, notificacaoMsg: '', notificacaoRelacao: '' })
+							.then(value => cadastroUsuarioSucesso(dispatch));
 					})
-					.catch(erro=>cadastroUsuarioErro(erro,dispatch))
-			}else{
-				Alert.alert('Erro', 'Não foi possível realizar o cadastro')
+					.catch(erro => cadastroUsuarioErro(erro, dispatch));
+			} else {
+				Alert.alert('Erro', 'Não foi possível realizar o cadastro');
 
-				cadastroUsuarioErro(1, dispatch)
+				cadastroUsuarioErro(1, dispatch);
 			}
-		}
-}
-export const cadastroUsuarioSucesso =(dispatch) => {
-	dispatch( { type: "CADASTRO_USUARIO_SUCESSO"});
+		};
+};
+
+export const cadastroUsuarioSucesso = (dispatch) => {
+	dispatch({ type: 'CADASTRO_USUARIO_SUCESSO' });
 	Actions.inicial();
+};
 
-}
-
-export const cadastroUsuarioErro =(erro,dispatch) => {
-	if(erro!= 1){
-		Alert.alert('Erro', 'Não foi possível realizar o cadastro')
-
+export const cadastroUsuarioErro = (erro, dispatch) => {
+	if (erro !== 1) {
+		Alert.alert('Erro', 'Não foi possível realizar o cadastro');
 	}
-	dispatch( { type: "CADASTRO_USUARIO_ERRO", payload : erro.message});
+	dispatch({ type: 'CADASTRO_USUARIO_ERRO', payload: erro.message });
+};
 
-}
-
-export const modificaDadosCadastroElogin = (texto, dado) =>{
-	switch(dado){
+export const modificaDadosCadastroElogin = (texto, dado) => {
+	switch (dado) {
 		case 1:
-			return{
-				type: "MODIFICA_EMAIL",
+			return {
+				type: 'MODIFICA_EMAIL',
 				payload: texto
-			}
+			};
 		case 2:
-			return{
-				type: "MODIFICA_SENHA",
+			return {
+				type: 'MODIFICA_SENHA',
 				payload: texto
-			}
+			};
 		case 3:
-			return{
-				type: "MODIFICA_NOME",
+			return {
+				type: 'MODIFICA_NOME',
 				payload: texto
-			}
-
+			};
+		default:
+			return 0;
 	}
-}
+};
 
-export const autenticar = ({email, senha}) =>{
-	const emailCriar = email.toLowerCase()
-	return dispatch=> {
-		dispatch({type: "LOGIN_EM_ANDAMENTO"})
-		firebase.auth().signInWithEmailAndPassword(emailCriar,senha)
+export const autenticar = ({ email, senha }) => {
+	const emailCriar = email.toLowerCase();
+	return dispatch => {
+		dispatch({ type: 'LOGIN_EM_ANDAMENTO' });
+		firebase.auth().signInWithEmailAndPassword(emailCriar, senha)
 			.then(value => aposAutenticar(dispatch))
-		.catch(erro => loginUsuarioErro(erro,dispatch))
-	}
-}
+		.catch(erro => loginUsuarioErro(erro, dispatch));
+	};
+};
 
 const aposAutenticar = (dispatch) => {
-		const email = firebase.auth().currentUser.email
-		const emailB64 = b64.encode(email.toLowerCase())
-			firebase.database().ref("usuarios/"+emailB64).once('value', (snapshot) => {
-				const info =  snapshot.val();
+		const email = firebase.auth().currentUser.email;
+		const emailB64 = b64.encode(email.toLowerCase());
+			firebase.database().ref('usuarios/' + emailB64).once('value', (snapshot) => {
+				const info = snapshot.val();
 				Actions.inicial();
-				dispatch({type: "LOGIN_USUARIO_SUCESSO", payload: info})
+				dispatch({ type: 'LOGIN_USUARIO_SUCESSO', payload: info });
+		});
+};
 
+const loginUsuarioErro = (erro, dispatch) => {
+	Alert.alert('Erro', 'Não foi possível realizar o login');
+	dispatch({ type: 'LOGIN_USUARIO_ERRO', payload: erro.message });
+};
 
-			
+export const validateToken = () => { 
+    return dispatch => {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                dispatch({ type: 'SET_USUARIO_FIREBASE', payload: user });
+                dispatch({ type: 'TOKEN_VALIDATED', payload: true });
+            } else {
+                dispatch({ type: 'TOKEN_VALIDATED', payload: false });
+            }
+        });
+    };
+};
 
-		})
+export const signOut = () => {
+    return dispatch => {
+		Actions.login();
+        firebase.auth().signOut().then(result => {
+            dispatch({ type: 'LOGIN_USUARIO_ERRO', payload: '' });
+        }, e => {
+            console.log(e);
+        });
+    };
+};
+
+export const autenticacaoDireta = () => {
+		return dispatch => {
+			const email = firebase.auth().currentUser.email;
+			const emailB64 = b64.encode(email.toLowerCase());
+			firebase.database().ref('usuarios/' + emailB64).once('value', (snapshot) => {
+			const info = snapshot.val();
+			dispatch({ type: 'LOGIN_USUARIO_SUCESSO', payload: info });
+			});
+		};
+};
+
+export const alterarSenha = (senha) => {
+	const {currentUser} = firebase.auth();
+	try{
+		currentUser.updatePassword(senha).then(() => Alert.alert('Êxito', 'Senha alterada com sucesso!'))
+		return{type: 'ALTERA_SENHA_CONCLUIDO', payload: ''}
+
+	}catch(erro){
+		Alert.alert('Erro', 'Você deve ter feito login recentemente para alterar sua senha.')
+		return{type: 'ALTERA_SENHA_CONCLUIDO', payload: ''}
+
+	}
 }
 
-
-
-const loginUsuarioErro = (erro,dispatch) => {
-	Alert.alert('Erro', 'Não foi possível realizar o login')
-	dispatch( {type : "LOGIN_USUARIO_ERRO", payload : erro.message})
+export const enviaConfirmacao = (email) =>{
+	var auth = firebase.auth();
+	auth.sendPasswordResetEmail(email).then(function() {
+	  // Email sent.
+	}).catch(function(error) {
+	  // An error happened.
+	});
+	return{type: 'EMAIL_VERIFICACAO', payload: ''}
 }
-
-
 /*export const loginFacebook = () =>{
 	LoginManager.logInWithReadPermissions(['public_profile', 'email']).then
 		(function(result) {

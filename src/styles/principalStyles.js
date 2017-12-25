@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-	viewHeader:{
+	viewHeader: {
 		backgroundColor: '#f6546a',
 		alignItems: 'center',
-		justifyContent: 'space-between',
+		justifyContent: 'space-around',
 		flexDirection: 'row',
-		padding:5,
-		flex:0.6
+		padding: 5,
+		flex: 0.6
 	},
 
 	textoHeader: {
@@ -17,16 +17,15 @@ const styles = StyleSheet.create({
 		color: 'snow'
 	},
 
-	viewTabInferior:{
+	viewTabInferior: {
 		backgroundColor: '#f6546a',
 		alignItems: 'center',
 		justifyContent: 'space-around',
 		flexDirection: 'row',
-		padding:5,
+		padding: 5,
 		flex: 0.6
 
 	}
 
-})
-
+});
 export default styles;

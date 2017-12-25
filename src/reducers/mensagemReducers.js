@@ -1,14 +1,12 @@
 
-
-
 const INITIAL_STATE = {
-}
+};
 
 export default (state = INITIAL_STATE, action) => {
-	switch(action.type){
-		case "LISTA_CONVERSA_USUARIO":
+	switch (action.type) {
+		case 'LISTA_CONVERSA_USUARIO':
 			return action.payload;
 		default:
 			return state;
 	}
-}
+};

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {View, StyleSheet, StatusBar} from 'react-native';
+import React, { Component } from 'react';
+import { View, StatusBar } from 'react-native';
 import Header from './headerTabMenu/Header.js';
 import TabInferior from './headerTabMenu/TabInferior.js';
 import Feed from './Feed.js';
@@ -8,52 +8,48 @@ import TelaRelacoes from './TelaRelacoes.js';   // POSSÍVEIS TELAS
 import TelaConversas from './TelaConversas.js';
 
 
-export default class Inicial extends Component{
-	constructor(props){
-		super(props)
+export default class Inicial extends Component {
+	constructor(props) {
+		super(props);
 		this.state = {
 			tela: this.props.valor
-		}
+		};
 	}
-	_tela(tela){
-		switch(tela){
+	_tela(tela) {
+		switch (tela) {
 			case 1:
-				return(
-					<TelaRelacoes/>
-				)
-			break;
+				return (
+					<TelaRelacoes />
+				);
 
 			case 2:
-				return(
+				return (
 					<Feed />
-				)
-				break;
+				);
 			case 3:
-				return(
+				return (
 					<NovoPostTela />
-				)
-				break
+				);
 			case 4:
-				return(
+				return (
 					<TelaConversas />
-				)
-				break;
+				);
 			default:
-				return(
+				return (
 					<Feed />
-				)
+				);
 		}
 	}
-	render(){
-		return(
-			<View style = {{flex:1, flexDirection: 'column', justifyContent: 'space-between'}}>
-				<StatusBar backgroundColor = '#f6546a'/>
+	render() {
+		return (
+			<View style = {{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
+				<StatusBar backgroundColor = '#f6546a' />
 				<Header />
 				{this._tela(this.state.tela)}
 				<TabInferior />
 			</View>
 
-		)
+		);
 	}
 }
 

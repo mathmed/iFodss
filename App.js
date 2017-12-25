@@ -5,7 +5,7 @@ import {createStore, applyMiddleware} from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './src/reducers';
 
-import Rotas from './src/Rotas.js';
+import AutenticarOuInicial from './src/AutenticarOuInicial.js';
 
 
 
@@ -19,14 +19,16 @@ componentWillMount() {
     storageBucket: "ifoda-1b50b.appspot.com",
     messagingSenderId: "419526190429"
   };
-  firebase.initializeApp(config);
+  if(!firebase.apps.lenght){
+    firebase.initializeApp(config);
+  }
 
 }
   render() {
     return (
         <Provider store = {createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
 
-          <Rotas />
+          <AutenticarOuInicial />
         </Provider>
 
     )

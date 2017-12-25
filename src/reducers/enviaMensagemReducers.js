@@ -1,16 +1,16 @@
-const INITIAL_STATE ={
+const INITIAL_STATE = {
 	mensagem: ''
-}
-export default (state = INITIAL_STATE, action) =>{
-		switch(action.type){
+};
+
+export default (state = INITIAL_STATE, action) => {
+		switch (action.type) {
 
 			case 'MODIFICA_MENSAGEM':
-				return{...state, mensagem: action.payload}
+				return { ...state, mensagem: action.payload };
 
 			case 'LIMPAR_MENSAGEM':
-				return{...state, mensagem: ''}
+				return { ...state, mensagem: '' };
 			default:
 				return state;
-
 		}
-}
+};
