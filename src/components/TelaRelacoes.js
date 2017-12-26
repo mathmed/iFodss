@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, ListView, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableHighlight, FlatList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
@@ -18,17 +18,8 @@ class TelaRelacoes extends Component {
     }
 	componentWillMount() {
 		this.props.listaRelacoesFetch();
-		this.criaFonteDeDados(this.props.ultimas);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		this.criaFonteDeDados(nextProps.ultimas);
-	}
-
-	criaFonteDeDados(ultimas) {
-		const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-		this.fonteDeDados1 = ds.cloneWithRows(ultimas);
-	}
 
 	novoMete1(nome, emailB64, fotoPerfil, idade, cidade, sexo) {
 		novoMete(nome, emailB64, fotoPerfil, idade, cidade, sexo);
@@ -91,10 +82,9 @@ class TelaRelacoes extends Component {
 	render() {
 		return (
 			<View style = {{ backgroundColor: 'snow', flex:8.5 }}>
-				<ListView
-					enableEmptySections
-					dataSource = {this.fonteDeDados1}
-					renderRow = {this.renderRow}
+				<FlatList
+					data = {this.props.ultimas}
+					renderItem = {({item}) => this.renderRow(item)}
 				/>
 				<DropdownAlert
 					ref={(ref) => this.dropdown = ref}
@@ -122,7 +112,6 @@ class TelaRelacoes extends Component {
   }
   
   onClose(data) {
-    console.log(data);
   }
 }
 

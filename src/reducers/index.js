@@ -7,8 +7,6 @@ import mensagemReducers from './mensagemReducers.js';
 import enviaMensagemReducers from './enviaMensagemReducers.js';
 import ultimasConversasReducer from './ultimasConversasReducer.js';
 import relacoesReducers from './relacoesReducers.js';
-import coresENotificacoesReducers from './coresENotificacoesReducers'
-
 
 export default combineReducers({
 	autenticacaoReducers,
@@ -18,6 +16,5 @@ export default combineReducers({
 	mensagemReducers,
 	enviaMensagemReducers,
 	ultimasConversasReducer,
-	relacoesReducers,
-	coresENotificacoesReducers
+	relacoesReducers
 });

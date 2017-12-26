@@ -80,7 +80,6 @@ class Recuperacao extends Component {
   }
   
 	onClose(data) {
-		console.log(data);
   }
 }
 

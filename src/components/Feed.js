@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, ListView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableHighlight, FlatList, Image, TouchableOpacity } from 'react-native';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -18,17 +18,8 @@ class Feed extends Component {
     }
 	componentWillMount() {
 		this.props.listarFeed();
-		this.criaFonteDeDados(this.props.ultimas);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		this.criaFonteDeDados(nextProps.ultimas);
-	}
-
-	criaFonteDeDados(ultimas) {
-		const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-		this.fonteDeDados1 = ds.cloneWithRows(ultimas);
-	}
 
 	novoMete1(nome, emailB64, fotoPerfil, idade, cidade, sexo) {
 		novoMete(nome, emailB64, fotoPerfil, idade, cidade, sexo);
@@ -82,10 +73,11 @@ class Feed extends Component {
 	render() {
 		return (
 			<View style = {{ flex: 8.5, backgroundColor: 'snow' }}>
-				<ListView
-					enableEmptySections
-					dataSource = {this.fonteDeDados1}
-					renderRow = {this.renderRow}
+				<FlatList
+					extraData = {this.props.ultimas}
+					data = {this.props.ultimas}
+					renderItem = {({item}) => this.renderRow(item)}
+
 				/>
 			<DropdownAlert
 				ref={(ref) => this.dropdown = ref}
@@ -114,8 +106,7 @@ class Feed extends Component {
   }
   
 	onClose(data) {
-		console.log(data);
-  }
+	}
 }
 
 

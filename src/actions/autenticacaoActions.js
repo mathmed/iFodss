@@ -54,7 +54,7 @@ export const cadastraUsuario = ({ nome, email, senha, sexo }) => {
 
 export const cadastroUsuarioSucesso = (dispatch) => {
 	dispatch({ type: 'CADASTRO_USUARIO_SUCESSO' });
-	Actions.inicial();
+	Actions.tabinferior();
 };
 
 export const cadastroUsuarioErro = (erro, dispatch) => {
@@ -101,7 +101,7 @@ const aposAutenticar = (dispatch) => {
 		const emailB64 = b64.encode(email.toLowerCase());
 			firebase.database().ref('usuarios/' + emailB64).once('value', (snapshot) => {
 				const info = snapshot.val();
-				Actions.inicial();
+				Actions.tabinferior();
 				dispatch({ type: 'LOGIN_USUARIO_SUCESSO', payload: info });
 		});
 };
@@ -129,9 +129,7 @@ export const signOut = () => {
 		Actions.login();
         firebase.auth().signOut().then(result => {
             dispatch({ type: 'LOGIN_USUARIO_ERRO', payload: '' });
-        }, e => {
-            console.log(e);
-        });
+        }, e => {});
     };
 };
 
@@ -147,13 +145,19 @@ export const autenticacaoDireta = () => {
 };
 
 export const alterarSenha = (senha) => {
-	const {currentUser} = firebase.auth();
-	try{
-		currentUser.updatePassword(senha).then(() => Alert.alert('Êxito', 'Senha alterada com sucesso!'))
-		return{type: 'ALTERA_SENHA_CONCLUIDO', payload: ''}
+	if(senha.length >= 6){
+		const {currentUser} = firebase.auth();
+		try{
+			currentUser.updatePassword(senha).then(() => Alert.alert('Êxito', 'Senha alterada com sucesso!'))
+			return{type: 'ALTERA_SENHA_CONCLUIDO', payload: ''}
 
-	}catch(erro){
-		Alert.alert('Erro', 'Você deve ter feito login recentemente para alterar sua senha.')
+		}catch(erro){
+			Alert.alert('Erro', 'Você deve ter feito login recentemente para alterar sua senha.')
+			return{type: 'ALTERA_SENHA_CONCLUIDO', payload: ''}
+
+		}
+	}else{
+		Alert.alert('Erro', 'Senha muito curta');
 		return{type: 'ALTERA_SENHA_CONCLUIDO', payload: ''}
 
 	}

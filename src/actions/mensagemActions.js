@@ -92,5 +92,5 @@ export const excluirConversas = email => {
 	const emailUsuarioB64 = b64.encode(currentUser.email);
 	var adaRef = firebase.database().ref('/usuario_conversas/' + emailUsuarioB64 + '/' + emailUsuarioExcluirB64);
 	adaRef.remove()
-		.catch(erro => (Alert.alert('Erro', erro)));
+	listaConversasUsuarioFetch()
 };

@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { View, Text, TextInput, TouchableHighlight, ListView } from 'react-native';
+import { View, Text, TextInput, TouchableHighlight, FlatList } from 'react-native';
 import { conversaUsuarioFetch, modificaMensagem, enviaMensagem } from '../actions/mensagemActions.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Conversa extends Component {
 	componentWillMount() {
 		this.props.conversaUsuarioFetch(this.props.email);
-		this.criaFonteDeDados(this.props.conversa);
 	}
-	componentWillReceiveProps(nextProps) {
-		if (this.props.email !== nextProps.email) {
-			this.props.conversaUsuarioFetch(nextProps.email);
-		}
-		this.criaFonteDeDados(nextProps.conversa);
-	}
+
 	_enviaMensagem() {
 		const { mensagem, nome, email, fotoPerfil } = this.props;
 		this.props.enviaMensagem(mensagem, nome, email, fotoPerfil) 
 	}
-	criaFonteDeDados(conversa) {
-		const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-		this.dataSource = ds.cloneWithRows(conversa);
-	}
+
 	renderRow(texto) {
 		if (texto.tipo === 'e') {
 			return (
@@ -53,10 +44,14 @@ class Conversa extends Component {
 		return (
 			<View style = {{ flex: 1, backgroundColor: 'snow', padding: 10 }}>
 				<View style = {{ flex: 1, paddingBottom: 20 }}>
-					<ListView
-						enableEmptySections
-						dataSource = {this.dataSource}
-						renderRow = {this.renderRow}
+					<FlatList
+						ref = { ( ref ) => this.scrollView = ref }
+						data = {this.props.conversa}
+						renderItem = {({item}) => this.renderRow(item)}
+						extraData = {this.props.conversa}
+						onContentSizeChange={ () => { this.scrollView.scrollToEnd( { animated: false } )} }
+
+
 					/>
 				</View>
 

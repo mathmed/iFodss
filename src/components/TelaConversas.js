@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, ListView, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableHighlight, FlatList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
@@ -15,21 +15,10 @@ class TelaConversas extends Component {
 		const itens = 
 			{ key: 1, backgroundColor: '#f6546a', type: 'success', title: 'Sucesso', message: 'Conversa apagada, mas ainda visível para o outro usuário.' };
 		this.state = {
-			itens:itens
-		};
+			itens:itens		};
 	}
 	componentWillMount() {
 		this.props.listaConversasUsuarioFetch();
-		this.criaFonteDeDados(this.props.ultimas);
-	}
-
-	componentWillReceiveProps(nextProps) {
-		this.criaFonteDeDados(nextProps.ultimas);
-	}
-
-	criaFonteDeDados(ultimas) {
-		const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-		this.fonteDeDados1 = ds.cloneWithRows(ultimas);
 	}
 
 	excluirConversas1(email) {
@@ -61,10 +50,9 @@ class TelaConversas extends Component {
 		return (
 			<View style = {{ flex: 8.5, backgroundColor: 'snow' }}>
 
-				<ListView
-					enableEmptySections
-					dataSource = {this.fonteDeDados1}
-					renderRow = {this.renderRow}
+				<FlatList
+					data = {this.props.ultimas}
+					renderItem = {({item}) => this.renderRow(item)}
 				/>
 				<DropdownAlert
 					ref={(ref) => this.dropdown = ref}
@@ -91,7 +79,6 @@ class TelaConversas extends Component {
 	}
 
 	onClose(data) {
-		console.log(data);
 	}
 }
 

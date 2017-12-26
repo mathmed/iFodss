@@ -48,13 +48,17 @@ class NovoPostTela extends Component {
 		super(props);
 		const erro = 
 			{ key: 1, backgroundColor: '#f6546a', type: 'error', title: 'Erro', message: 'Carregue uma foto para publicar seu post. ' };
+		const enviando = 
+			{ key: 2, backgroundColor: '#f6546a', type: 'custom', title: 'Aguarde', message: 'Seu post está sendo enviado.' };
+
 
 		this.state = {
 			imagePath: '',
 			imageHeight: '',
 			imageWidth: '',
 			status: '',
-			erro: erro
+			erro: erro,
+			enviando: enviando
 		};
 	}
 
@@ -62,6 +66,7 @@ class NovoPostTela extends Component {
 		if(this.state.imagePath) {
 			this.props.foto = uploadImage(this.state.imagePath, `${this.state.imagePath}.jpg`).then((responseData) =>
 					this.props.publicarStatus(responseData, this.props.status));
+					this.showAlert(2);
 			} else {
 				this.showAlert(1);
 			}
@@ -127,8 +132,8 @@ class NovoPostTela extends Component {
 				const title = this.state.erro.title;
 				this.dropdown.alertWithType(this.state.erro.type, title, this.state.erro.message);
 			} else {
-				const title = this.state.erro.title;
-				this.dropdown.alertWithType(this.state.erro.type, title, this.state.erro.message);
+				const title = this.state.enviando.title;
+				this.dropdown.alertWithType(this.state.enviando.type, title, this.state.enviando.message);
 		}
 	}
 }
@@ -138,7 +143,6 @@ class NovoPostTela extends Component {
 	}
 
 	onClose(data) {
-		console.log(data);
 	}
 
 	show() {
@@ -153,16 +157,11 @@ class NovoPostTela extends Component {
 			}
 			};
 			ImagePicker.launchImageLibrary(options, (response) => {
-				console.log('Response = ', response);
-
 			if (response.didCancel) {
-				console.log('User cancelled image picker');
 			}
 			else if (response.error) {
-				console.log('ImagePicker Error: ', response.error);
 			}
 			else if (response.customButton) {
-				console.log('User tapped custom button: ', response.customButton);
 			}
 			else {
 
