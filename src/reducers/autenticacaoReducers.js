@@ -1,4 +1,5 @@
 import { Actions } from 'react-native-router-flux';
+import { Alert } from 'react-native';
 
 const INITIAL_STATE = {
 	nome: '',
@@ -13,7 +14,8 @@ const INITIAL_STATE = {
 	usuario_firebase: [],
 	checkMasculino: true,
 	checkFeminino: false,
-	senha_alterar: ''
+	senha_alterar: '',
+	confirmaSenha: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -34,6 +36,8 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, senha: action.payload };
 		case 'MODIFICA_NOME':
 			return { ...state, nome: action.payload };
+		case 'MODIFICA_CONFIRMA_SENHA':
+			return { ...state, confirmaSenha: action.payload };
 		case 'LOGIN_EM_ANDAMENTO':
 			return { ...state, loadingLogin: true, email: '', senha: '' };
 		case 'LOGIN_USUARIO_ERRO':
@@ -41,7 +45,9 @@ export default (state = INITIAL_STATE, action) => {
         case 'SET_USUARIO_FIREBASE':
             return { ...state, usuario_firebase: action.payload };
         case 'ALTERA_SENHA_CONCLUIDO':
-        	return { ...state, senha: ''}
+        	return { ...state, senha: action.payload, confirmaSenha: action.payload}
+        case 'ALTERA_SENHA_ERRO':
+        	return { ...state, senha: action.payload, confirmaSenha: action.payload}
         case 'EMAIL_VERIFICACAO':
         	return { ...state, email: ''}
         case 'TOKEN_VALIDATED':

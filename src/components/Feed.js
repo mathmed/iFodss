@@ -33,7 +33,7 @@ class Feed extends Component {
 					<View style={{ flex: 1, borderBottomWidth: 1, borderColor: '#CCC', marginHorizontal: 10 }}>
 						<View style = {{ justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
 							<TouchableOpacity onPress = {() => Actions.telafoto({ title: 'Perfil de ' + ultimas.nome , email: ultimas.emailB64})}>
-								<UserAvatar size="100" name="MM" src = {ultimas.fotoPerfil} />	
+								<UserAvatar size="70" name="MM" src = {ultimas.fotoPerfil} />	
 							</TouchableOpacity>					
 							<Text style = {{ fontSize: 14, fontWeight: 'bold', color: 'black', marginTop: 5 }}> {ultimas.nome}, {ultimas.idade} - {ultimas.cidade} </Text>
 						</View>
@@ -41,7 +41,7 @@ class Feed extends Component {
 						<View style = {{ justifyContent: 'center', alignItems: 'center', marginBottom: 5 }}>
 							<View style = {{ justifyContent: 'center', alignItems: 'center', marginTop: 10, marginBottom: 20, marginLeft: 7, marginRight: 7 }}>
 								<Text style = {{ fontSize: 12, color: 'grey', justifyContent: 'center', alignItems: 'center' }}> {ultimas.dataPublicacao} </Text>
-								<Text style={{ fontSize: 14, fontWeight: 'bold', color: 'grey', justifyContent: 'center', alignItems: 'center' }}> {ultimas.status} </Text>
+								<Text style={{ fontSize: 14,  color: 'grey', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}> {ultimas.status} </Text>
 				
 							</View>
 
@@ -52,12 +52,12 @@ class Feed extends Component {
 							<View style = {{ flexDirection: 'row', marginBottom: 20 }}>
 								<View style = {{ marginLeft: 20, marginRight: 20 }}>
 									<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.novoMete1(ultimas.nome, ultimas.emailB64, ultimas.fotoPerfil, ultimas.idade, ultimas.cidade, ultimas.sexo)} >
-										<Icon name = 'favorite' size = {40} color = '#f6546a' />
+										<Icon name = 'favorite' size = {30} color = '#f6546a' />
 									</TouchableHighlight>
 								</View>
 								<View style = {{ marginLeft: 20, marginRight: 20 }}>
 									<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.conversa({ title: ultimas.nome, email:ultimas.emailB64, nome: ultimas.nome, fotoPerfil: ultimas.fotoPerfil })} >
-										<Icon name = 'chat' size = {40} color = '#f6546a' />
+										<Icon name = 'chat' size = {30} color = '#f6546a' />
 									</TouchableHighlight>
 								</View>
 							</View>

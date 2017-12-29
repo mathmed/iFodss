@@ -78,7 +78,7 @@ class NovoPostTela extends Component {
 
 		return (
 			<TouchableHighlight underlayColor = 'transparent' onPress = {() => this._publicar()} >
-				<Text style = {{fontSize: 26, color: 'grey', fontWeight: 'bold'}}> Publicar </Text>
+				<Text style = {{fontSize: 18, color: 'grey', fontWeight: 'bold'}}> Publicar </Text>
 			</TouchableHighlight>
 		);
 	}
@@ -104,7 +104,7 @@ class NovoPostTela extends Component {
 
 						<View style = {{ backgroundColor: 'snow', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10 }}>
 							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.show()} >
-								<Icon name = 'add-a-photo' size = {40} color = 'grey' />
+								<Icon name = 'add-a-photo' size = {25} color = 'grey' />
 							</TouchableHighlight>
 
 							{this._renderBotao()}

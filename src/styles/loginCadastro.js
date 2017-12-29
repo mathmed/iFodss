@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 	viewPrincipal:{
 		flex:1,
-		padding:10
+		backgroundColor: 'snow'
 	},
 
 	viewLogo:{
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		flexDirection: 'row',
 		marginTop: 30,
-		flex: 0.2
+		flex: 0.2, marginBottom: 15
 	},
 
 	textoLogo:{
@@ -20,12 +20,6 @@ const styles = StyleSheet.create({
 		color: '#f6546a',
 		fontWeight: 'bold',
 		fontFamily: 'sans-serif-medium'
-	},
-
-	viewEntradas: {
-		marginTop:40,
-		padding:10,
-		flex: 2
 	},
 
 	botao: {

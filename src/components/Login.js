@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, TouchableHighlight, Image, ActivityIndicator } from 'react-native';
-import { Kaede } from 'react-native-textinput-effects';
+import { Text, View, ImageBackground, TouchableHighlight, Image, ActivityIndicator, TextInput, StatusBar } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from '../styles/loginCadastro.js';
 import { connect } from 'react-redux';
@@ -10,11 +9,11 @@ import { modificaDadosCadastroElogin, autenticar } from '../actions/autenticacao
 class Login extends Component {
 	_renderizarBotao() {
         if (this.props.loadingLogin) {
-			return (<ActivityIndicator size = 'large' />);
+			return (<ActivityIndicator size = 'large' color = '#f6546a' />);
 	}
 
 		return (
-			<View style = {{ marginTop: 20, alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+			<View style = {{ alignItems: 'center', justifyContent: 'center', flex: 1, marginBottom: 40 }}>
 				<TouchableHighlight onPress = {() => this._login()} underlayColor = 'transparent'>
 					<View style = {styles.botao}>
 							<Text style = {[styles.textoLogo, { fontSize: 20, color: 'snow' }]}> Login </Text>
@@ -34,31 +33,25 @@ class Login extends Component {
 
 	render() {
 		return (
-			<ImageBackground style = {{ flex: 1, width: null }} source = {require('../imgs/fundo.jpg')}>
 
 				<View style = {styles.viewPrincipal}>
+					<StatusBar backgroundColor = '#f6546a' />
+
 					<View style = {styles.viewLogo}>
 						<Text style = {[styles.textoLogo, { color: '#f6546a' }]}>iFods</Text>
 					</View>
 
-					<View style = {styles.viewEntradas}>
-						<View style = {{ margin: 10 }}>
-							<Kaede
-								label={'E-Mail'}
-								style={{ backgroundColor: '#f9f5ed' }}
-								labelStyle={{ color: 'grey', backgroundColor: 'snow' }}
-								inputStyle={{ color: 'black', backgroundColor: 'snow' }}
+					<View style = {{ flex: 2, padding: 20, margin: 10 }}>
+							<TextInput
+								placeholder = 'E-Mail'
+								underlineColorAndroid = '#f6546a'
 								value = {this.props.email}
 								onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 1)}
 							/>
-						</View>
 
-						<View style = {{ margin: 10 }}>
-							<Kaede
-								style={{ backgroundColor: '#f9f5ed' }}
-								label={'Senha'}
-								labelStyle={{ color: 'grey', backgroundColor: 'snow' }}
-								inputStyle={{ color: 'black', backgroundColor: 'snow' }}
+							<TextInput
+								underlineColorAndroid = '#f6546a'
+								placeholder = 'Senha'
 								secureTextEntry = {true}
 								value = {this.props.senha}
 								onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 2)}
@@ -70,23 +63,22 @@ class Login extends Component {
 
 
 
+					<View style = {{ backgroundColor: '#f6546a', flex: 0.8, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
 
 						<View style = {{ marginTop: 10, alignItems: 'center', justifyContent: 'center', flex: 1}}>
 							<TouchableHighlight onPress = {() => Actions.cadastro()} underlayColor = 'transparent'>
-								<Text style = {[styles.textoLogo, { fontSize: 18, color: 'snow' }]}> Cadastre-se! </Text>
+								<Text style = {[styles.textoLogo, { fontSize: 14, color: 'snow' }]}> Cadastre-se! </Text>
 							</TouchableHighlight>
 						</View>
 
 						<View style = {{ marginTop: 10, alignItems: 'center', justifyContent: 'center', flex: 1, marginBottom: 5 }}>
 							<TouchableHighlight onPress = {() => Actions.recuperacao()} underlayColor = 'transparent'>
-								<Text style = {[styles.textoLogo, { fontSize: 18, color: 'snow' }]}> Esqueci minha senha </Text>
+								<Text style = {[styles.textoLogo, { fontSize: 14, color: 'snow' }]}> Esqueci minha senha </Text>
 							</TouchableHighlight>
 						</View>
-			
-					</View>
+				</View>
 
 				</View>
-			</ImageBackground>
 
 		);
 	}

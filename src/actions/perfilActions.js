@@ -78,3 +78,11 @@ const alteradoErro = (erro, dispatch) => {
 		type: 'ERRO'
 	});
 };
+
+export const alteraDrawer = (tipo) => {
+	if (tipo === 'saiu'){
+		return{ type: 'ALTERA_DRAWER', payload: false}
+	}else{
+		return { type: 'ALTERA_DRAWER', payload: true }
+	}
+}

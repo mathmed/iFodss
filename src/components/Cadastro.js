@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, TouchableHighlight, ActivityIndicator } from 'react-native';
-import { Kaede } from 'react-native-textinput-effects';
+import { Text, View, ImageBackground, TouchableHighlight, ActivityIndicator, TextInput } from 'react-native';
 import CheckBox from 'react-native-checkbox';
 import styles from '../styles/loginCadastro.js';
 import { connect } from 'react-redux';
@@ -10,7 +9,7 @@ import { alteraCheckBoxFeminino, alteraCheckBoxMasculino, cadastraUsuario, modif
 class Cadastro extends Component {
 	_renderizarBotao() {
         if (this.props.loadingCadastro) {
-			return (<ActivityIndicator size = 'large' />);
+			return (<ActivityIndicator size = 'large' color = '#f6546a' />);
 	}
 
 		return (
@@ -42,54 +41,42 @@ class Cadastro extends Component {
 	}
 	render() {
 		return (
-			<ImageBackground style = {{ flex: 1, width: null }} source = {require('../imgs/fundo.jpg')}>
 				<View style = {styles.viewPrincipal}>
-					<View style = {{ marginTop: 10, padding: 5, flex: 10 }}>
-						<View style = {{ margin: 7 }}>
-							<Kaede
-								label={'E-Mail'}
-								style={{ backgroundColor: '#f9f5ed' }}
-								labelStyle={{ color: 'grey', backgroundColor: 'snow' }}
-								inputStyle={{ color: 'black', backgroundColor: 'snow' }}
+						<View style = {{  padding: 20, margin: 10 }}>
+							<TextInput
+								placeholder = 'E-Mail'
+								underlineColorAndroid = '#f6546a'
 								value = {this.props.email}
 								onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 1)}
 							/>
-						</View>
 
-						<View style = {{ margin: 7 }}>
-							<Kaede
-								style={{ backgroundColor: '#f9f5ed' }}
-								label={'Senha'}
-								labelStyle={{ color: 'grey', backgroundColor: 'snow' }}
-								inputStyle={{ color: 'black', backgroundColor: 'snow' }}
+							<TextInput
+								placeholder = 'Senha'
+								underlineColorAndroid = '#f6546a'
 								secureTextEntry = {true}
 								value = {this.props.senha}
 								onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 2)}
 							/>
-						</View>
 
-						<View style = {{ margin: 7 }}>
-							<Kaede
-								label={'Nome'}
-								style={{ backgroundColor: '#f9f5ed' }}
-								labelStyle={{ color: 'grey', backgroundColor: 'snow' }}
-								inputStyle={{ color: 'black', backgroundColor: 'snow' }}
+							<TextInput
+								placeholder = 'Nome'
+								underlineColorAndroid = '#f6546a'
 								value = {this.props.nome}
 								onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 3)}
 							/>
 						</View>
 
-						<View style = {{ margin: 7 }}>
+						<View style = {{ margin: 7, justifyContent: 'center', alignItems: 'center' }}>
 							<View style = {{ justifyContent: 'space-between', padding: 10, flexDirection: 'row' }}>
 								<CheckBox
 									label='Masculino'
-									labelStyle = {{ color: 'white' }}
+									labelStyle = {{ color: 'grey' }}
 									checked={this.props.checkMasculino}
 									onChange={checked => this.props.alteraCheckBoxMasculino(checked)}
 								/>
 								<CheckBox
 									label='Feminino'
-									labelStyle = {{ color: 'white' }}
+									labelStyle = {{ color: 'grey' }}
 									checked={this.props.checkFeminino}
 									onChange={checked => this.props.alteraCheckBoxFeminino(checked)}
 								/>
@@ -102,8 +89,6 @@ class Cadastro extends Component {
 					</View>
 
 
-				</View>
-			</ImageBackground>
 		);
 	}
 }

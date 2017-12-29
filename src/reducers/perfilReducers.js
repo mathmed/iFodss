@@ -4,7 +4,8 @@ const INITIAL_STATE = {
 	bio: '',
 	idade: '',
 	foto: '',
-	carregando: false
+	carregando: false,
+	statusDrawer: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -25,6 +26,8 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, carregando: false };
 		case 'LOGIN_USUARIO_SUCESSO':
 			return { ...state, cidade: action.payload.cidade, bio: action.payload.bio, nome: action.payload.nome, idade: action.payload.idade, foto: action.payload };
+		case 'ALTERA_DRAWER':
+			return { ...state, statusDrawer: action.payload }
 		default:
 			return state;
 	}

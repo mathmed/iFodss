@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, ActivityIndicator, Platform } from 'react-native';
+import { View, Text, TouchableHighlight, ActivityIndicator, Platform, TextInput } from 'react-native';
 import UserAvatar from 'react-native-user-avatar';
-import { Kaede } from 'react-native-textinput-effects';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
@@ -85,8 +84,8 @@ class Perfil extends Component {
 
 		return (
 			<TouchableHighlight onPress = {() => this._salvar()} underlayColor = 'transparent'>
-				<View style = {{ marginTop: 15, backgroundColor: 'snow', borderWidth: 3, borderRadius: 20, borderColor: '#f6546a', height: 50, width: 150, alignItems: 'center', justifyContent: 'center' }}>
-					<Text style = {{ fontSize: 20, fontWeight: 'bold', color: 'grey' }}> Salvar </Text>
+				<View style = {{ marginTop: 15, backgroundColor: '#f6546a', borderRadius: 20, height: 30, width: 100, alignItems: 'center', justifyContent: 'center' }}>
+					<Text style = {{ fontSize: 16, fontWeight: 'bold', color: 'snow' }}> Salvar </Text>
 				</View>
 			</TouchableHighlight>
 
@@ -100,44 +99,36 @@ class Perfil extends Component {
 					<UserAvatar size="100" name="MM" component = {{ avatar }} /> }
 
 						<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.show()} >
-							<Icon name = 'add-a-photo' size = {40} color = 'grey' />
+							<Icon name = 'add-a-photo' size = {30} color = 'grey' />
 						</TouchableHighlight>
 				</View>
 
-				<View style = {{ margin: 10, padding: 5, flex: 4 }}>
-					<Kaede
-						style={{ backgroundColor: '#f9f5ed' }}
-						label={'Nome'}
-						labelStyle={{ color: 'snow', backgroundColor: '#f6546a' }}
-						inputStyle={{ color: 'black', backgroundColor: 'snow', borderWidth: 3, borderColor: '#f6546a' }}
+				<View style = {{ padding: 20, margin: 10, flex: 4 }}>
+					<TextInput
+						placeholder = 'Nome'
+						underlineColorAndroid = '#f6546a'
 						value = {this.props.nome}
 						onChangeText = {texto => this.props.modificaDadosPerfil(texto, 1)}
 
 					/>
-					<Kaede
-						style={{ backgroundColor: '#f9f5ed' }}
-						label={'Cidade'}
-						labelStyle={{ color: 'snow', backgroundColor: '#f6546a' }}
-						inputStyle={{ color: 'black', backgroundColor: 'snow', borderWidth: 3, borderColor: '#f6546a' }}
+					<TextInput
+						placeholder = 'Cidade'
+						underlineColorAndroid = '#f6546a'
 						value = {this.props.cidade}
 						onChangeText = {texto => this.props.modificaDadosPerfil(texto, 2)}
 
 					/>
-					<Kaede
-						style={{ backgroundColor: '#f9f5ed' }}
-						label={'Interesses'}
-						labelStyle={{ color: 'snow', backgroundColor: '#f6546a' }}
-						inputStyle={{ color: 'black', backgroundColor: 'snow', borderWidth: 3, borderColor: '#f6546a' }}
+					<TextInput
+						placeholder = 'Interesses'
+						underlineColorAndroid = '#f6546a'
 						value = {this.props.bio}
 						onChangeText = {texto => this.props.modificaDadosPerfil(texto, 3)}
 
 					/>
-					<Kaede
-						style={{ backgroundColor: '#f9f5ed' }}
-						label={'Idade'}
-						labelStyle={{ color: 'snow', backgroundColor: '#f6546a' }}
-						inputStyle={{ color: 'black', backgroundColor: 'snow', borderWidth: 3, borderColor: '#f6546a' }}
+					<TextInput
+						placeholder = 'Idade'
 						keyboardType = 'numeric'
+						underlineColorAndroid = '#f6546a'
 						value = {this.props.idade}
 						onChangeText = {texto => this.props.modificaDadosPerfil(texto, 4)}
 

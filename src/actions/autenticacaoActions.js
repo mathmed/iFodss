@@ -54,7 +54,7 @@ export const cadastraUsuario = ({ nome, email, senha, sexo }) => {
 
 export const cadastroUsuarioSucesso = (dispatch) => {
 	dispatch({ type: 'CADASTRO_USUARIO_SUCESSO' });
-	Actions.tabinferior();
+	Actions.inicial();
 };
 
 export const cadastroUsuarioErro = (erro, dispatch) => {
@@ -81,6 +81,11 @@ export const modificaDadosCadastroElogin = (texto, dado) => {
 				type: 'MODIFICA_NOME',
 				payload: texto
 			};
+		case 4:
+			return {
+				type: 'MODIFICA_CONFIRMA_SENHA',
+				payload: texto
+			}
 		default:
 			return 0;
 	}
@@ -101,7 +106,7 @@ const aposAutenticar = (dispatch) => {
 		const emailB64 = b64.encode(email.toLowerCase());
 			firebase.database().ref('usuarios/' + emailB64).once('value', (snapshot) => {
 				const info = snapshot.val();
-				Actions.tabinferior();
+				Actions.inicial();
 				dispatch({ type: 'LOGIN_USUARIO_SUCESSO', payload: info });
 		});
 };
@@ -144,21 +149,27 @@ export const autenticacaoDireta = () => {
 		};
 };
 
-export const alterarSenha = (senha) => {
+export const alterarSenha = (senha, confirmaSenha) => {
 	if(senha.length >= 6){
-		const {currentUser} = firebase.auth();
-		try{
-			currentUser.updatePassword(senha).then(() => Alert.alert('Êxito', 'Senha alterada com sucesso!'))
-			return{type: 'ALTERA_SENHA_CONCLUIDO', payload: ''}
+		if(senha === confirmaSenha){
+			const {currentUser} = firebase.auth();
+			try{
+				currentUser.updatePassword(senha).then(() => Alert.alert('Êxito', 'Senha alterada com sucesso!'))
+				return{type: 'ALTERA_SENHA_CONCLUIDO', payload: ''}
 
-		}catch(erro){
-			Alert.alert('Erro', 'Você deve ter feito login recentemente para alterar sua senha.')
-			return{type: 'ALTERA_SENHA_CONCLUIDO', payload: ''}
+			}catch(erro){
+				Alert.alert('Erro', 'Você deve ter feito login recentemente para alterar sua senha.')
+				return{type: 'ALTERA_SENHA_ERRO', payload: ''}
+
+			}
+		}else{
+			Alert.alert('Erro', "Senhas informadas divergem");
+			return{type: 'ALTERA_SENHA_ERRO', payload: ''}
 
 		}
 	}else{
 		Alert.alert('Erro', 'Senha muito curta');
-		return{type: 'ALTERA_SENHA_CONCLUIDO', payload: ''}
+		return{type: 'ALTERA_SENHA_ERRO', payload: ''}
 
 	}
 }

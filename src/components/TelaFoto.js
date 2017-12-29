@@ -34,7 +34,7 @@ export default class TelaFoto extends Component {
 				<ScrollView>
 					<Image source = {{ uri: this.state.foto }} style={{ padding: '50%', margin: 3 }} />
 					<View style = {{ alignItems: 'center', justifyContent: 'center', marginBottom: 20, marginTop: 15 }}>
-						<Text style = {{ fontSize: 16, fontWeight: 'bold'}}> {this.state.nome}, {this.state.idade} anos </Text>
+						<Text style = {{ fontSize: 16, fontWeight: 'bold', color: 'black'}}> {this.state.nome}, {this.state.idade} anos </Text>
 						<Text style = {{ fontSize: 14 }}> Mora em {this.state.cidade} </Text>
 						<Text style = {{ fontSize: 14 }}> Sexo {this.state.sexo} </Text>
 						<Text style = {{ fontSize: 14 }}> Interesses: {this.state.bio} </Text>
