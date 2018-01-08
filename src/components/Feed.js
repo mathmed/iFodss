@@ -52,12 +52,12 @@ class Feed extends Component {
 							<View style = {{ flexDirection: 'row', marginBottom: 20 }}>
 								<View style = {{ marginLeft: 20, marginRight: 20 }}>
 									<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.novoMete1(ultimas.nome, ultimas.emailB64, ultimas.fotoPerfil, ultimas.idade, ultimas.cidade, ultimas.sexo)} >
-										<Icon name = 'favorite' size = {30} color = '#f6546a' />
+										<Icon name = 'favorite' size = {30} color = 'red' />
 									</TouchableHighlight>
 								</View>
 								<View style = {{ marginLeft: 20, marginRight: 20 }}>
 									<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.conversa({ title: ultimas.nome, email:ultimas.emailB64, nome: ultimas.nome, fotoPerfil: ultimas.fotoPerfil })} >
-										<Icon name = 'chat' size = {30} color = '#f6546a' />
+										<Icon name = 'chat' size = {30} color = '#1d396f' />
 									</TouchableHighlight>
 								</View>
 							</View>

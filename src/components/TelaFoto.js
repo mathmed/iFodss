@@ -60,13 +60,13 @@ class TelaFoto extends Component {
 					<View style = {{ flexDirection: 'row', marginBottom: 20, justifyContent: 'center' }}>
 						<View style = {{}}>
 							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.novoMete1(this.state.nome, this.props.email, this.state.foto, this.state.idade, this.state.cidade, this.state.sexo)} >
-								<Icon name = 'favorite' size = {30} color = '#f6546a' />
+								<Icon name = 'favorite' size = {30} color = 'red' />
 							</TouchableHighlight>
 						</View>
 
 						<View style = {{ }}>
 							<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.conversa({ title: this.state.nome, email: this.props.email, nome: this.state.nome, fotoPerfil: this.state.foto })} >
-								<Icon name = 'chat' size = {30} color = '#f6546a' />
+								<Icon name = 'chat' size = {30} color = '#1d396f' />
 							</TouchableHighlight>
 						</View>
 					</View>

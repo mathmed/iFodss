@@ -55,11 +55,13 @@ class Conversa extends Component {
 					/>
 				</View>
 
-				<View style = {{ flexDirection: 'row', borderWidth: 1, borderColor: 'grey' }} >
+				<View style = {{ flexDirection: 'row' }} >
 					<TextInput
 						value = {this.props.mensagem}
 						style = {{ flex: 3, fontSize: 16 }}
 						onChangeText = {texto => this.props.modificaMensagem(texto)}
+						returnKeyType= 'send'
+						multiline
 					/>
 
 

@@ -42,12 +42,12 @@ class TelaRelacoes extends Component {
 						<View style = {{ flexDirection: 'row', margin: 10, alignItems: 'space-around', justifyContent: 'center' }}>
 								<View style = {{ margin: 5 }}>
 									<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.novoMete1(ultimas.nome, b64.encode(ultimas.email), ultimas.foto, ultimas.idade, ultimas.cidade, ultimas.sexo)} >
-										<Icon name = 'favorite' size = {25} color = '#f6546a' />
+										<Icon name = 'favorite' size = {25} color = 'red' />
 									</TouchableHighlight>
 								</View>
 								<View style = {{ margin: 5 }}>
 									<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.conversa({ title: ultimas.nome, email: b64.encode(ultimas.email), nome: ultimas.nome, fotoPerfil: ultimas.foto })} >
-										<Icon name = 'chat' size = {25} color = '#f6546a' />
+										<Icon name = 'chat' size = {25} color = '#1d396f' />
 									</TouchableHighlight>
 								</View>
 						</View>
@@ -70,7 +70,7 @@ class TelaRelacoes extends Component {
 						<View style = {{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 10 }}>
 								<View style = {{ alignItems: 'center', justifyContent: 'center' }}>
 									<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.conversa({ title: ultimas.nome, email: b64.encode(ultimas.email), nome: ultimas.nome, fotoPerfil: ultimas.foto })} >
-										<Icon name = 'chat' size = {25} color = '#f6546a' />
+										<Icon name = 'chat' size = {25} color = '#1d396f' />
 									</TouchableHighlight>
 								</View>
 						</View>

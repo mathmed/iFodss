@@ -35,36 +35,38 @@ export const enviaMensagem = (mensagem, contatoNome, contatoEmail, fotoPerfil) =
 		const d2 = ' às ';
 		const d3 = moment().local().format('h:mm a');
 		const dataMSG = d1 + d2 + d3;
-		return dispatch => {
-		firebase.database().ref('/mensagens/' + usuarioEmailB64 + '/' + contatoEmail)
-			.push({ mensagem, tipo: 'e', date: dataMSG })
-			.then(() => {
-				firebase.database().ref('/mensagens/' + contatoEmail + '/' + usuarioEmailB64)
-					.push({ mensagem, tipo: 'r', date: dataMSG })
-					.then(() => dispatch({ type: 'LIMPAR_MENSAGEM' }));
-			})
-			.then(() => {
-				firebase.database().ref('/usuario_conversas/' + usuarioEmailB64 + '/' + contatoEmail)
-					.set({ nome: contatoNome, email: b64.decode(contatoEmail), data: data, foto: fotoPerfil })
+			return dispatch => {
+				if(mensagem){
+					firebase.database().ref('/mensagens/' + usuarioEmailB64 + '/' + contatoEmail)
+						.push({ mensagem, tipo: 'e', date: dataMSG })
 						.then(() => {
-							firebase.database().ref('usuarios/' + contatoEmail).once('value', snapshot => {
-								const geral = snapshot.val();
-								var notificacaoMsg = geral.notificacaoMsg;
-								notificacaoMsg++;
-								firebase.database().ref('usuarios/' + contatoEmail).update({ notificacaoMsg: notificacaoMsg})
-							})
+							firebase.database().ref('/mensagens/' + contatoEmail + '/' + usuarioEmailB64)
+								.push({ mensagem, tipo: 'r', date: dataMSG })
+								.then(() => dispatch({ type: 'LIMPAR_MENSAGEM' }));
 						})
-			})
-			.then(() => {
-				firebase.database().ref('/usuarios/' + usuarioEmailB64)
-					.once('value')
-					.then(snapshot => {
-						const dadosUsuario = snapshot.val();
-						firebase.database().ref('/usuario_conversas/' + contatoEmail + '/' + usuarioEmailB64)
-							.set({ nome: dadosUsuario.nome, email: usuarioEmail, data: data, foto: dadosUsuario.foto });
-					});
-			});
-	};
+						.then(() => {
+							firebase.database().ref('/usuario_conversas/' + usuarioEmailB64 + '/' + contatoEmail)
+								.set({ nome: contatoNome, email: b64.decode(contatoEmail), data: data, foto: fotoPerfil })
+									.then(() => {
+										firebase.database().ref('usuarios/' + contatoEmail).once('value', snapshot => {
+											const geral = snapshot.val();
+											var notificacaoMsg = geral.notificacaoMsg;
+											notificacaoMsg++;
+											firebase.database().ref('usuarios/' + contatoEmail).update({ notificacaoMsg: notificacaoMsg})
+										})
+									})
+						})
+						.then(() => {
+							firebase.database().ref('/usuarios/' + usuarioEmailB64)
+								.once('value')
+								.then(snapshot => {
+									const dadosUsuario = snapshot.val();
+									firebase.database().ref('/usuario_conversas/' + contatoEmail + '/' + usuarioEmailB64)
+										.set({ nome: dadosUsuario.nome, email: usuarioEmail, data: data, foto: dadosUsuario.foto });
+								});
+						});
+				};
+		}
 };
 
 export const listaConversasUsuarioFetch = () => {

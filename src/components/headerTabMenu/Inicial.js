@@ -81,7 +81,7 @@ class Inicial extends Component {
 
 					</View>				
 				{this.state.tela}
-					<View style = {{backgroundColor: 'snow', borderWidth: 2, borderColor: 'snow', borderTopColor: '#FFA07A', alignItems: 'center', justifyContent: 'space-around', flexDirection: 'row', padding: 5, flex: 0.6}}>
+					<View style = {{backgroundColor: 'snow', borderWidth: 2, borderColor: 'snow', borderTopColor: '#f6546a', alignItems: 'center', justifyContent: 'space-around', flexDirection: 'row', padding: 5, flex: 0.6}}>
 						<View style = {{ alignItems: 'center', justifyContent: 'center' }}>
 							<View style = {{ flexDirection: 'row' }}>
 								<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.chamarTela(1)} >
@@ -106,7 +106,7 @@ class Inicial extends Component {
 
 						<View style = {{ alignItems: 'center', justifyContent: 'center' }}>
 							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.setState({ tela: (<NovoPostTela /> ), corRelacao: '#f6546a', corFeed: '#f6546a', corMsg: '#f6546a', corNovoPost: 'grey'})} >
-								<Icon name = 'add-circle' size = {22} color = {this.state.corNovoPost} />
+								<Icon name = 'add-circle-outline' size = {22} color = {this.state.corNovoPost} />
 							</TouchableHighlight>
 							<Text style = {{ fontSize: 10 }}> Novo Post </Text>
 

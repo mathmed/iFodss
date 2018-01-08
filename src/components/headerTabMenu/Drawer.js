@@ -69,7 +69,7 @@ class DrawerTela extends Component {
 				<View style = {{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'snow' }}>
 					{this.state.image ? <UserAvatar size="70" name="AvishayBar" src = {this.state.image} /> : 
 					<UserAvatar size="70" name="MM" component = {{ avatar }} /> }
-					<Text style = {{ fontSize: 12, color: 'grey', fontWeight: 'bold', marginTop: 15 }}> {this.state.nome} </Text>
+					<Text style = {{ fontSize: 15, color: 'grey', fontWeight: 'bold', marginTop: 15 }}> {this.state.nome} </Text>
 				</View>
 				<View style = {{ marginBottom: 50, backgroundColor: 'snow' }}>
 					<FlatList
