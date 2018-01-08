@@ -20,7 +20,7 @@ class Conversa extends Component {
 			return (
 				<View style = {{ alignItems: 'flex-end', marginTop: 5, marginBottom: 5, marginLeft: 40 }}>
 					<View style = {{ backgroundColor: '#dbf5b4', borderRadius: 20 }}>
-						<Text style = {{ fontSize: 18, color: 'black', padding: 10, elevation:1 }}> {texto.mensagem} </Text>
+						<Text style = {{ fontSize: 14, color: 'black', padding: 10, elevation:1 }}> {texto.mensagem} </Text>
 						<Text style = {{ fontSize: 12, color: 'black', padding: 10, elevation:1 }}> {texto.date} </Text>
 					</View>
 				</View>
@@ -31,7 +31,7 @@ class Conversa extends Component {
 			return (
 				<View style = {{ alignItems: 'flex-start', marginTop: 5, marginBottom: 5, marginRight: 40 }}>
 					<View style = {{ backgroundColor: '#98c1c0', borderRadius: 20 }}>
-						<Text style = {{ fontSize: 18, color: 'black', padding: 10, elevation: 1 }}>{texto.mensagem}</Text>
+						<Text style = {{ fontSize: 14, color: 'black', padding: 10, elevation: 1 }}>{texto.mensagem}</Text>
 						<Text style = {{ fontSize: 12, color: 'black', padding: 10, backgroundColor: '#98c1c0', elevation: 1 }}> {texto.date} </Text>
 					</View>
 				</View>
@@ -55,16 +55,16 @@ class Conversa extends Component {
 					/>
 				</View>
 
-				<View style = {{ flexDirection: 'row', borderWidth: 3, borderColor: 'grey' }} >
+				<View style = {{ flexDirection: 'row', borderWidth: 1, borderColor: 'grey' }} >
 					<TextInput
 						value = {this.props.mensagem}
-						style = {{ flex: 4, fontSize: 18 }}
+						style = {{ flex: 3, fontSize: 16 }}
 						onChangeText = {texto => this.props.modificaMensagem(texto)}
 					/>
 
 
 					<TouchableHighlight onPress = {this._enviaMensagem.bind(this)} underlayColor = 'transparent'>
-						<Icon name = {'send'} size = {40} color = {'#f6546a'} />
+						<Icon name = {'send'} size = {30} color = {'#f6546a'} />
 					</TouchableHighlight>
 
 

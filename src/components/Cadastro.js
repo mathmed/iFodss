@@ -31,13 +31,15 @@ class Cadastro extends Component {
 		const nome = this.props.nome;
 		const email = this.props.email;
 		const senha = this.props.senha;
+		const cidade = this.props.cidade;
+		const idade = this.props.idade;
 		if (this.props.checkMasculino) {
 			sexo = 'Masculino';
 		} else {
 			sexo = 'Feminino';
 		}
 
-		this.props.cadastraUsuario({ nome, email, senha, sexo });
+		this.props.cadastraUsuario({ nome, email, senha, sexo, cidade, idade });
 	}
 	render() {
 		return (
@@ -59,10 +61,24 @@ class Cadastro extends Component {
 							/>
 
 							<TextInput
-								placeholder = 'Nome'
+								placeholder = 'Nome e sobrenome'
 								underlineColorAndroid = '#f6546a'
 								value = {this.props.nome}
 								onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 3)}
+							/>
+
+							<TextInput
+								placeholder = 'Cidade'
+								underlineColorAndroid = '#f6546a'
+								value = {this.props.cidade}
+								onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 6)}
+							/>
+							<TextInput
+								placeholder = 'Idade'
+								underlineColorAndroid = '#f6546a'
+								keyboardType = 'numeric'
+								value = {this.props.idade}
+								onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 5)}
 							/>
 						</View>
 
@@ -100,6 +116,8 @@ const mapStateToProps = state => (
         erroCadastro: state.autenticacaoReducers.erroCadastro,
         loadingCadastro: state.autenticacaoReducers.loadingCadastro,
         nome: state.autenticacaoReducers.nome,
+        idade: state.autenticacaoReducers.idade,
+        cidade: state.autenticacaoReducers.cidade,
         checkMasculino: state.autenticacaoReducers.checkMasculino,
         checkFeminino: state.autenticacaoReducers.checkFeminino
 

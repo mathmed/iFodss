@@ -32,10 +32,9 @@ class TelaConversas extends Component {
 				<View style={{ flex: 1, padding: 10, borderBottomWidth: 1, borderColor: '#CCC', flexDirection: 'row', justifyContent: 'space-between' }}>
 					<View style = {{ marginLeft: 2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
 						<TouchableOpacity onPress = {() => Actions.telafoto({ title: 'Perfil de ' + ultimas.nome , email: b64.encode(ultimas.email)})}>
-
 							<UserAvatar size="50" name="MM" src = {ultimas.foto} />
 						</TouchableOpacity>
-						<Text style={{ fontSize: 22 }}> {ultimas.nome} </Text>
+						<Text style={{ fontSize: 16 }}> {ultimas.nome} </Text>
 					</View>
 					<View style = {{ marginRight: 15 }}>
 						<TouchableHighlight onPress = {() => this.excluirConversas1(ultimas.email)} underlayColor = 'transparent'>

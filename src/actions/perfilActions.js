@@ -33,19 +33,23 @@ export const modificaDadosPerfil = (texto, dado) => {
 export const salvarDados = (nome, cidade, bio, idade) => {
 	return dispatch => {
 		dispatch({ type: 'ANDAMENTO' });
-		const email = firebase.auth().currentUser.email;
-		const emailB64 = b64.encode(email);
-		firebase.database().ref('usuarios/' + emailB64).once('value', (snapshot) => {
-			const info = snapshot.val();
-			info.nome = nome;
-			info.cidade = cidade;
-			info.bio = bio;
-			info.idade = idade;
-			firebase.database().ref('usuarios/' + emailB64).set(info)
-				.then(value => alteradoSucesso(dispatch))
+		if (nome.length >= 8 && cidade.length >= 4 && (idade <= 80 && idade >= 16) && idade % 1 === 0){
+			const email = firebase.auth().currentUser.email;
+			const emailB64 = b64.encode(email);
+			firebase.database().ref('usuarios/' + emailB64).once('value', (snapshot) => {
+				const info = snapshot.val();
+				info.nome = nome;
+				info.cidade = cidade;
+				info.bio = bio;
+				info.idade = idade;
+				firebase.database().ref('usuarios/' + emailB64).set(info)
+					.then(value => alteradoSucesso(dispatch)).then(() => Alert.alert('Sucesso', 'Dados alterados com sucesso!'))
+						.catch(erro => alteradoErro(erro, dispatch));
+				})
 					.catch(erro => alteradoErro(erro, dispatch));
-			})
-				.catch(erro => alteradoErro(erro, dispatch));
+		}else{
+			alteradoErro('Preencha os campos corretamente', dispatch)
+		}
 	};
 };
 

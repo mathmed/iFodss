@@ -3,6 +3,7 @@ import { Router, Scene } from 'react-native-router-flux';
 import Configuracoes from './components/Configuracoes.js'
 import Login from './components/Login.js';
 import Cadastro from './components/Cadastro.js';
+import Pesquisar from './components/Pesquisar.js';
 import Conversa from './components/Conversa.js';
 import Perfil from './components/Perfil.js';
 import TelaFoto from './components/TelaFoto.js';
@@ -18,6 +19,7 @@ export default class RotasDeslogado extends Component {
 					<Scene key = 'perfil' component = {Perfil} title="Editar perfil" titleStyle = {{ color: 'snow', backgroundColor: '#f6546a', fontSize: 16 }} hideNavBar = {false} navigationBarStyle={{ backgroundColor: '#f6546a', height: 40 }} headerTintColor="snow" /> 
 					<Scene key = 'inicial' component = {Inicial} hideNavBar  />
 					<Scene key = 'configuracoes' component = {Configuracoes} title="Alterar senha" titleStyle = {{color: 'snow', backgroundColor: '#f6546a', fontSize: 16}} hideNavBar = {false} navigationBarStyle={{backgroundColor: '#f6546a', height: 40}} headerTintColor="snow"/> 
+					<Scene key = 'pesquisar' component = {Pesquisar} title="Pessoas" titleStyle = {{color: 'snow', backgroundColor: '#f6546a', fontSize: 16}} hideNavBar = {false} navigationBarStyle={{backgroundColor: '#f6546a', height: 40}} headerTintColor="snow"/> 
                     <Scene key = 'conversa' component = {Conversa} title = '' hideNavBar = {false} navigationBarStyle = {{backgroundColor: '#f6546a', height: 40}} titleStyle= {{ color: 'white', fontWeight: 'bold', fontSize: 20, alignItems: 'center', fontSize: 16 }} headerTintColor="snow"/>
                     <Scene key = 'telafoto' component = {TelaFoto} title = '' hideNavBar = {false} navigationBarStyle = {{backgroundColor: '#f6546a', height: 40}} titleStyle= {{ color: 'white', fontWeight: 'bold', fontSize: 20, alignItems: 'center', fontSize: 16 }}/>
 					<Scene key = 'cadastro' component = {Cadastro} title="Cadastro" titleStyle = {{color: 'snow', backgroundColor: '#f6546a', fontSize: 16}} hideNavBar = {false} navigationBarStyle={{ backgroundColor: '#f6546a', height: 40 }} headerTintColor="snow"/> 

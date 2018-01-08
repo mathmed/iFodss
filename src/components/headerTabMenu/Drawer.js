@@ -16,11 +16,12 @@ class DrawerTela extends Component {
 	constructor(props){
 		super(props);
 		const lista = [
-			{key: 0, title: 'Meu perfil', img: 'perm-identity', onPress: () => Actions.telafoto({ title: 'Meu perfil', email: b64.encode(this.state.email)})},
-			{key: 1, title: 'Alterar senha', img: 'build', onPress:() => Actions.configuracoes() },
-			{key: 2, title: 'Editar perfil', img: 'settings',onPress: () => Actions.perfil() },
-			{key: 3, title: 'Deslogar', img: 'power-settings-new', onPress: () => this.props.signOut() },
-			{key: 4, title: 'Voltar', img: 'arrow-back', onPress: () => this.props.alteraDrawer('saiu')}
+			{key: 0, title: 'Procurar pessoas', img: 'search', onPress:() => Actions.pesquisar() },
+			{key: 1, title: 'Meu perfil', img: 'perm-identity', onPress: () => Actions.telafoto({ title: 'Meu perfil', email: b64.encode(this.state.email)})},
+			{key: 2, title: 'Alterar senha', img: 'build', onPress:() => Actions.configuracoes() },
+			{key: 3, title: 'Editar perfil', img: 'settings',onPress: () => Actions.perfil() },
+			{key: 4, title: 'Deslogar', img: 'power-settings-new', onPress: () => this.props.signOut() },
+			{key: 5, title: 'Voltar', img: 'arrow-back', onPress: () => this.props.alteraDrawer('saiu')}
 
 		]
 		this.state = {
@@ -54,7 +55,7 @@ class DrawerTela extends Component {
 					</View>
 
 					<View style = {{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-						<Text style = {{ fontSize: 14, fontWeight: 'bold', color: 'grey' }}> {item.title} </Text>
+						<Text style = {{ fontSize: 12, fontWeight: 'bold', color: 'grey' }}> {item.title} </Text>
 					</View>
 				</View>
 			</TouchableHighlight>
@@ -65,12 +66,12 @@ class DrawerTela extends Component {
 	render() {
 		return(
 			<View style = {{ flex: 1, backgroundColor: 'snow'}}>
-				<View style = {{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+				<View style = {{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'snow' }}>
 					{this.state.image ? <UserAvatar size="70" name="AvishayBar" src = {this.state.image} /> : 
 					<UserAvatar size="70" name="MM" component = {{ avatar }} /> }
 					<Text style = {{ fontSize: 12, color: 'grey', fontWeight: 'bold', marginTop: 15 }}> {this.state.nome} </Text>
 				</View>
-				<View style = {{ marginBottom: 100 }}>
+				<View style = {{ marginBottom: 50, backgroundColor: 'snow' }}>
 					<FlatList
 						extraData = {this.state.lista}
 						data = {this.state.lista}

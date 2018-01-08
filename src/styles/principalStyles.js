@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
 	viewHeader: {
 		backgroundColor: '#f6546a',
 		alignItems: 'center',
-		justifyContent: 'space-between',
 		flexDirection: 'row',
 		padding: 5,
 		flex: 0.4

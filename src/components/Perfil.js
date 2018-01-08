@@ -48,7 +48,7 @@ class Perfil extends Component {
 	constructor(props) {
 		super(props);
 		const itens = 
-			{ key: 1, backgroundColor: '#f6546a', type: 'success', title: 'Sucesso', message: 'Dados atualizados.' };
+			{ key: 1, backgroundColor: '#f6546a', type: 'custom', title: 'Aguarde', message: 'Dados sendo atualizados.' };
 		this.state = {
 			imagePath: '',
 			imageHeight: '',

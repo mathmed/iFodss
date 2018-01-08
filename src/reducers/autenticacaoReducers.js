@@ -5,6 +5,8 @@ const INITIAL_STATE = {
 	nome: '',
 	email: '',
 	senha: '',
+	cidade: '',
+	idade: '',
 	erroCadastro: '',
 	erroLogin: '',
 	loadingLogin: false,
@@ -25,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
 		case 'MODIFICA_FEMININO':
 			return { ...state, checkFeminino: action.payload.feminino, checkMasculino: action.payload.masculino };
 		case 'CADASTRO_EM_ANDAMENTO':
-			return { ...state, loadingCadastro: true, email: '', senha: '', nome: '' };
+			return { ...state, loadingCadastro: true, email: '', senha: '', nome: '', idade: '', cidade: '' };
 		case 'CADASTRO_USUARIO_SUCESSO':
 			return { ...state, loadingCadastro: false };
 		case 'CADASTRO_USUARIO_ERRO':
@@ -36,6 +38,10 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, senha: action.payload };
 		case 'MODIFICA_NOME':
 			return { ...state, nome: action.payload };
+		case 'MODIFICA_CIDADE_CADASTRO':
+			return { ...state, cidade: action.payload };
+		case 'MODIFICA_IDADE_CADASTRO':
+			return { ...state, idade: action.payload };
 		case 'MODIFICA_CONFIRMA_SENHA':
 			return { ...state, confirmaSenha: action.payload };
 		case 'LOGIN_EM_ANDAMENTO':

@@ -75,7 +75,7 @@ class Inicial extends Component {
 							<Icon name='menu' size={25} color='snow' />
 						</TouchableHighlight>
 
-						<Text style={styles.textoHeader}> iFods </Text>
+						<Text style={{ 	fontSize: 16, fontWeight: 'bold', fontFamily: 'sans-serif-medium', color: 'snow', marginLeft: '35%'}}> iFods </Text>
 
 
 
@@ -85,43 +85,43 @@ class Inicial extends Component {
 						<View style = {{ alignItems: 'center', justifyContent: 'center' }}>
 							<View style = {{ flexDirection: 'row' }}>
 								<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.chamarTela(1)} >
-									<Icon name = 'favorite' size = {18} color =  {this.state.corRelacao} />
+									<Icon name = 'favorite' size = {22} color =  {this.state.corRelacao} />
 								</TouchableHighlight>
 								<View>
-									<Text style = {{ fontWeight: 'bold', color: 'red' }}>{this.state.notificacaoRelacao}</Text>
+									<Text style = {{ fontWeight: 'bold', color: 'red', fontSize: 10 }}>{this.state.notificacaoRelacao}</Text>
 								</View>
 							</View>
-							<Text style = {{ fontSize: 10, fontWeight: 'bold' }}> Relações </Text>
+							<Text style = {{ fontSize: 10 }}> Relações </Text>
 
 
 						</View>
 
 						<View style = {{ alignItems: 'center', justifyContent: 'center' }}>
 							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.setState({ tela: (<Feed /> ), corRelacao: '#f6546a', corFeed: 'grey', corMsg: '#f6546a', corNovoPost: '#f6546a'})} >
-									<Icon name = 'home' size = {18} color = {this.state.corFeed} />
+									<Icon name = 'home' size = {22} color = {this.state.corFeed} />
 							</TouchableHighlight>
-							<Text style = {{ fontSize: 10, fontWeight: 'bold' }}> Feed </Text>
+							<Text style = {{ fontSize: 10 }}> Feed </Text>
 
 						</View>
 
 						<View style = {{ alignItems: 'center', justifyContent: 'center' }}>
 							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.setState({ tela: (<NovoPostTela /> ), corRelacao: '#f6546a', corFeed: '#f6546a', corMsg: '#f6546a', corNovoPost: 'grey'})} >
-								<Icon name = 'add-circle' size = {18} color = {this.state.corNovoPost} />
+								<Icon name = 'add-circle' size = {22} color = {this.state.corNovoPost} />
 							</TouchableHighlight>
-							<Text style = {{ fontSize: 10, fontWeight: 'bold' }}> Novo Post </Text>
+							<Text style = {{ fontSize: 10 }}> Novo Post </Text>
 
 						</View>
 
 						<View style = {{ alignItems: 'center', justifyContent: 'center' }}>
 							<View style = {{ flexDirection: 'row' }}>
 								<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.chamarTela(2)} >
-									<Icon name = 'forum' size = {18} color = {this.state.corMsg} /> 
+									<Icon name = 'forum' size = {22} color = {this.state.corMsg} /> 
 								</TouchableHighlight>
 								<View>
-									<Text style = {{ fontWeight: 'bold', color: 'red' }}>{this.state.notificacaoMsg}</Text>
+									<Text style = {{ fontWeight: 'bold', color: 'red', fontSize: 10  }}>{this.state.notificacaoMsg}</Text>
 								</View>
 							</View>
-							<Text style = {{ fontSize: 10, fontWeight: 'bold' }}> Conversas </Text>
+							<Text style = {{ fontSize: 10 }}> Conversas </Text>
 
 						</View>
 					</View>

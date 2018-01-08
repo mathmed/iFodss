@@ -74,7 +74,7 @@ export const listaConversasUsuarioFetch = () => {
 		if (currentUser) {
 			const emailUsuarioB64 = b64.encode(currentUser.email);
 			firebase.database().ref('/usuario_conversas/' + emailUsuarioB64).orderByChild('data')
-				.on('value', snapshot => {
+				.once('value', snapshot => {
 					snapshot.forEach((snap) => {
 						const duck = snap.val();
 

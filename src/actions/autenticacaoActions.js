@@ -28,15 +28,13 @@ export const alteraCheckBoxFeminino = (check) => {
 		};
 };
 
-export const cadastraUsuario = ({ nome, email, senha, sexo }) => {
-	const cidade = '';
-	const bio = "Ola! Eu sou " + nome;
+export const cadastraUsuario = ({ nome, email, senha, sexo, cidade, idade }) => {
+	const bio = '';
 	const foto = '';
-	const idade = '';
 	const emailCriar = email.toLowerCase();
 	return dispatch => {
 		dispatch({ type: 'CADASTRO_EM_ANDAMENTO' });
-			if (nome.length >= 4) {
+			if (nome.length >= 8 && cidade.length >= 4 && (idade >= 16 && idade <= 80) && (idade % 1 === 0))  {
 				firebase.auth().createUserWithEmailAndPassword(emailCriar, senha)
 					.then(user => {
 						const emailB64 = b64.encode(emailCriar);
@@ -45,7 +43,7 @@ export const cadastraUsuario = ({ nome, email, senha, sexo }) => {
 					})
 					.catch(erro => cadastroUsuarioErro(erro, dispatch));
 			} else {
-				Alert.alert('Erro', 'Não foi possível realizar o cadastro');
+				Alert.alert('Erro', 'Preencha os campos corretamente.');
 
 				cadastroUsuarioErro(1, dispatch);
 			}
@@ -59,7 +57,7 @@ export const cadastroUsuarioSucesso = (dispatch) => {
 
 export const cadastroUsuarioErro = (erro, dispatch) => {
 	if (erro !== 1) {
-		Alert.alert('Erro', 'Não foi possível realizar o cadastro');
+		Alert.alert('Erro', erro);
 	}
 	dispatch({ type: 'CADASTRO_USUARIO_ERRO', payload: erro.message });
 };
@@ -84,6 +82,16 @@ export const modificaDadosCadastroElogin = (texto, dado) => {
 		case 4:
 			return {
 				type: 'MODIFICA_CONFIRMA_SENHA',
+				payload: texto
+			}
+		case 5:
+			return {
+				type: 'MODIFICA_IDADE_CADASTRO',
+				payload: texto
+			}
+		case 6:
+			return {
+				type: 'MODIFICA_CIDADE_CADASTRO',
 				payload: texto
 			}
 		default:
