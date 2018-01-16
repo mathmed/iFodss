@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Image, Text, ScrollView, TouchableHighlight } from 'react-native';
+import { View, Image, Text, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native';
 import firebase from 'firebase';
 import { novoMete } from '../actions/relacoesActions.js';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/FontAwesome'
 import DropdownAlert from 'react-native-dropdownalert';
 
 
@@ -21,7 +22,8 @@ class TelaFoto extends Component {
 			sexo: '',
 			bio: '',
 			nome: '',
-			itens: itens
+			itens: itens,
+			loading: true
 		}
 	}
 
@@ -34,7 +36,8 @@ class TelaFoto extends Component {
 				idade: info.idade,
 				sexo: info.sexo,
 				bio: info.bio,
-				nome: info.nome
+				nome: info.nome,
+				loading: false
 			})
 		})
 	}
@@ -46,15 +49,37 @@ class TelaFoto extends Component {
 
 	}
 	render() {
+	    if (this.state.loading) {
+	      return (
+	        <View style={{ flex: 1, paddingTop: 20, justifyContent: 'center', alignItems: 'center', backgroundColor: 'snow' }}>
+	          <ActivityIndicator size = 'large' color = '#f6546a' />
+	        </View>
+	      );
+	    }
 		return (
 			<View style = {{ flex: 1, backgroundColor: 'snow' }}>
 				<ScrollView>
 					<Image source = {{ uri: this.state.foto }} style={{ padding: '50%', margin: 3 }} />
-					<View style = {{ alignItems: 'center', justifyContent: 'center', marginBottom: 20, marginTop: 15 }}>
-						<Text style = {{ fontSize: 16, fontWeight: 'bold', color: 'black'}}> {this.state.nome}, {this.state.idade} anos </Text>
-						<Text style = {{ fontSize: 14 }}> Mora em {this.state.cidade} </Text>
-						<Text style = {{ fontSize: 14 }}> Sexo {this.state.sexo} </Text>
-						<Text style = {{ fontSize: 14 }}> Interesses: {this.state.bio} </Text>
+					<View style = {{ marginBottom: 20, marginTop: 15 }}>
+						
+						<Text style = {{ fontSize: 16, fontWeight: 'bold', color: 'black', textAlign: 'center' }}> {this.state.nome}, {this.state.idade} anos </Text>
+						
+						<View style = {{ flexDirection: 'row', marginTop: '5%', alignItems: 'center', justifyContent: 'center', }}>
+							<Icon name ='place' size = {20} color = 'grey' />
+							<Text style = {{ fontSize: 14 }}> mora em {this.state.cidade} </Text>
+						</View>
+
+						<View style = {{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
+							{(this.state.sexo === 'Masculino') ? <Icon2 name = 'mars' size = {15} color = 'grey' /> : <Icon2 name = 'venus' size = {15} color = 'grey' />}
+							<Text style = {{ fontSize: 14 }}> {this.state.sexo}</Text>
+						</View>
+
+						<Text style = {{ fontSize: 14, fontWeight: 'bold', marginTop: 5, textAlign: 'center', justifyContent: 'center', }}> Sobre </Text>
+
+						<View style = {{ padding: 5, alignItems: 'center', justifyContent: 'center'  }}>
+							<Text style = {{ fontSize: 14, textAlign: 'center' }}>{this.state.bio}</Text>
+						</View>
+
 					</View>
 
 					<View style = {{ flexDirection: 'row', marginBottom: 20, justifyContent: 'center' }}>
@@ -64,7 +89,7 @@ class TelaFoto extends Component {
 							</TouchableHighlight>
 						</View>
 
-						<View style = {{ }}>
+						<View style = {{}}>
 							<TouchableHighlight underlayColor = 'transparent' onPress = {() => Actions.conversa({ title: this.state.nome, email: this.props.email, nome: this.state.nome, fotoPerfil: this.state.foto })} >
 								<Icon name = 'chat' size = {30} color = '#1d396f' />
 							</TouchableHighlight>

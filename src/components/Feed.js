@@ -35,7 +35,7 @@ class Feed extends Component {
 							<TouchableOpacity onPress = {() => Actions.telafoto({ title: 'Perfil de ' + ultimas.nome , email: ultimas.emailB64})}>
 								<UserAvatar size="70" name="MM" src = {ultimas.fotoPerfil} />	
 							</TouchableOpacity>					
-							<Text style = {{ fontSize: 14, fontWeight: 'bold', color: 'black', marginTop: 5 }}> {ultimas.nome}, {ultimas.idade} - {ultimas.cidade} </Text>
+							<Text style = {{ fontSize: 14, fontWeight: 'bold', color: 'black', marginTop: 5 }}> {ultimas.nome} </Text>
 						</View>
 
 						<View style = {{ justifyContent: 'center', alignItems: 'center', marginBottom: 5 }}>

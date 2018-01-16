@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
-import { Kaede } from 'react-native-textinput-effects';
+import { Text, View, TouchableHighlight, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { modificaDadosCadastroElogin, enviaConfirmacao } from '../actions/autenticacaoActions.js';
 import DropdownAlert from 'react-native-dropdownalert';
@@ -28,11 +27,10 @@ class Recuperacao extends Component {
 				</View>
 
 				<View style = {{ margin: 7 }}>
-							<Kaede
-								label={'E-Mail'}
-								style={{ backgroundColor: '#f9f5ed' }}
-								labelStyle={{ color: 'snow', backgroundColor: '#f6546a' }}
-								inputStyle={{ color: 'grey', backgroundColor: 'snow' }}
+							<TextInput
+								underlineColorAndroid = '#f6546a'
+
+								placeholder='E-Mail'
 								value = {this.props.email}
 								onChangeText = {texto => this.props.modificaDadosCadastroElogin(texto, 1)}
 							/>

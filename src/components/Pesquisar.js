@@ -93,7 +93,7 @@ class Pesquisar extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={{flex: 1, paddingTop: 20, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flex: 1, paddingTop: 20, justifyContent: 'center', alignItems: 'center', backgroundColor: 'snow' }}>
           <ActivityIndicator size = 'large' color = '#f6546a' />
         </View>
       );
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
  MainContainer :{
  
   flex:1,
-  margin: 7,
+  backgroundColor: 'snow'
 
  
   },
@@ -170,7 +170,8 @@ const styles = StyleSheet.create({
    borderWidth: 2,
    borderColor: '#f6546a',
    borderRadius: 7 ,
-   backgroundColor : "#FFFFFF"
+   backgroundColor : "#FFFFFF",
+   margin: 7
         
    }
  

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, Image, Platform, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableHighlight, Image, Platform, ActivityIndicator, TextInput } from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { Kaede } from 'react-native-textinput-effects';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import { modificaStatusNovoPost, publicarStatus } from '../actions/publicacaoActions.js';
@@ -92,12 +91,10 @@ class NovoPostTela extends Component {
 				</View>
 
 				<View style = {{ flex: 0.5, backgroundColor: 'snow', borderRadius: 30, marginTop: 10 }}>
-							<Kaede
-								style={{ backgroundColor: '#f9f5ed' }}
-								label={'Status'}
-								labelStyle={{ color: 'snow', backgroundColor: '#f6546a' }}
-								inputStyle={{ color: 'black', backgroundColor: 'snow', borderWidth: 3, borderColor: '#f6546a' }}
-								secureTextEntry = {false}
+							<TextInput
+								returnKeyType= 'done'
+								placeholder = 'Status'
+								underlineColorAndroid = '#f6546a'
 								value = {this.props.status}
 								onChangeText = {texto => this.props.modificaStatusNovoPost(texto)}
 							/>

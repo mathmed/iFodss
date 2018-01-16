@@ -30,7 +30,7 @@ export const alteraCheckBoxFeminino = (check) => {
 
 export const cadastraUsuario = ({ nome, email, senha, sexo, cidade, idade }) => {
 	const bio = '';
-	const foto = '';
+	const foto = 'https://firebasestorage.googleapis.com/v0/b/ifoda-1b50b.appspot.com/o/images%2Favatar.jpg?alt=media&token=67e41a9d-a686-4600-9bc9-1e106f7c76e7';
 	const emailCriar = email.toLowerCase();
 	return dispatch => {
 		dispatch({ type: 'CADASTRO_EM_ANDAMENTO' });

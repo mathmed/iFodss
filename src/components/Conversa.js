@@ -62,6 +62,8 @@ class Conversa extends Component {
 						onChangeText = {texto => this.props.modificaMensagem(texto)}
 						returnKeyType= 'send'
 						multiline
+						underlineColorAndroid = '#f6546a'
+
 					/>
 
 

@@ -72,10 +72,10 @@ class Inicial extends Component {
 				<View style = {{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
 					<View style={styles.viewHeader}>
 						<TouchableHighlight underlayColor='transparent' onPress={() => {this.props.alteraDrawer('abriu')}} >
-							<Icon name='menu' size={25} color='snow' />
+							<Icon name='menu' size={30} color='snow' />
 						</TouchableHighlight>
 
-						<Text style={{ 	fontSize: 16, fontWeight: 'bold', fontFamily: 'sans-serif-medium', color: 'snow', marginLeft: '35%'}}> iFods </Text>
+						<Text style={{ 	fontSize: 18, fontWeight: 'bold', fontFamily: 'sans-serif-medium', color: 'snow', marginLeft: '35%'}}> iFods </Text>
 
 
 
@@ -91,7 +91,10 @@ class Inicial extends Component {
 									<Text style = {{ fontWeight: 'bold', color: 'red', fontSize: 10 }}>{this.state.notificacaoRelacao}</Text>
 								</View>
 							</View>
-							<Text style = {{ fontSize: 10 }}> Relações </Text>
+							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.chamarTela(1)} >
+
+								<Text style = {{ fontSize: 10 }}> Relações </Text>
+							</TouchableHighlight>
 
 
 						</View>
@@ -100,15 +103,21 @@ class Inicial extends Component {
 							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.setState({ tela: (<Feed /> ), corRelacao: '#f6546a', corFeed: 'grey', corMsg: '#f6546a', corNovoPost: '#f6546a'})} >
 									<Icon name = 'home' size = {22} color = {this.state.corFeed} />
 							</TouchableHighlight>
-							<Text style = {{ fontSize: 10 }}> Feed </Text>
+
+							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.setState({ tela: (<Feed /> ), corRelacao: '#f6546a', corFeed: 'grey', corMsg: '#f6546a', corNovoPost: '#f6546a'})} >
+								<Text style = {{ fontSize: 10 }}> Feed </Text>
+							</TouchableHighlight>
 
 						</View>
 
 						<View style = {{ alignItems: 'center', justifyContent: 'center' }}>
 							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.setState({ tela: (<NovoPostTela /> ), corRelacao: '#f6546a', corFeed: '#f6546a', corMsg: '#f6546a', corNovoPost: 'grey'})} >
-								<Icon name = 'add-circle-outline' size = {22} color = {this.state.corNovoPost} />
+								<Icon name = 'file-upload' size = {22} color = {this.state.corNovoPost} />
 							</TouchableHighlight>
-							<Text style = {{ fontSize: 10 }}> Novo Post </Text>
+
+							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.setState({ tela: (<NovoPostTela /> ), corRelacao: '#f6546a', corFeed: '#f6546a', corMsg: '#f6546a', corNovoPost: 'grey'})} >
+								<Text style = {{ fontSize: 10 }}> Novo Post </Text>
+							</TouchableHighlight>
 
 						</View>
 
@@ -121,7 +130,11 @@ class Inicial extends Component {
 									<Text style = {{ fontWeight: 'bold', color: 'red', fontSize: 10  }}>{this.state.notificacaoMsg}</Text>
 								</View>
 							</View>
-							<Text style = {{ fontSize: 10 }}> Conversas </Text>
+
+							<TouchableHighlight underlayColor = 'transparent' onPress = {() => this.chamarTela(2)} >
+
+								<Text style = {{ fontSize: 10 }}> Conversas </Text>
+							</TouchableHighlight>
 
 						</View>
 					</View>
